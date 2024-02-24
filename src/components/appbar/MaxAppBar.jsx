@@ -1,26 +1,20 @@
 "use client"
-import  React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import SearchIcon from '@mui/icons-material/Search';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import NightlightIcon from '@mui/icons-material/Nightlight';
-import Colors from "../../app/theme/colors"
+import AsideBarM from './AsideBarM';
+import Link from 'next/link';
 
 
-const pages = ['Sport', 'Health', 'Political', 'Business','Finance',"Life", "Entertainment"];
-const settings = [ 'Dashboard', 'Logout'];
+const pages = ['Sport', 'Health', 'Political', 'Business', 'Finance', "Life", "Entertainment"];
+const settings = ['Dashboard', 'Logout'];
 
 function MaxAppBar() {
+  const [themeMode, setThemeMode] = React.useState(true);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -40,15 +34,16 @@ function MaxAppBar() {
   };
 
   return (
-    <AppBar className="glass" position="static" sx={{display:{xs:"none",lg:"inline"},bgcolor:"#e59a4d"}}>
+    <AppBar position="static" sx={{ display: { xs: "none", lg: "inline" }, bgcolor: "#e59a4d" }}>
       <Container maxWidth="xl" className="glass">
-        <Toolbar disableGutters sx={{justifyContent:"space-between"}}> 
-        
+        <Toolbar
+          disableGutters
+          sx={{ justifyContent: "space-between" }}>
+
           <Typography
             variant="h4"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component="h4"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -57,12 +52,14 @@ function MaxAppBar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              flexGrow:1,mr:6
+              flexGrow: 1, mr: 6
             }}
           >
-            Nxnews
+            <Link href="/">
+              Nxnews
+            </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1,display:"flex"}}>
+          <Box sx={{ flexGrow: 1, display: "flex" }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -73,59 +70,18 @@ function MaxAppBar() {
               </Button>
             ))}
           </Box>
-          
-          <Box sx={{ flexGrow: 0 }}>
-            <IconButton sx={{mr:1,color: 'white',}}>
-                <SearchIcon sx={{width:20,height:20}}/>
-            </IconButton>
-            <IconButton sx={{color: 'white',mr:1}}>
-            {
-                                true ?<LightModeIcon/>:<NightlightIcon/>
-                            }
-            </IconButton>
-            <Typography  variant="h5" sx={{display:"inline",color: 'white',}}>
-                |
-            </Typography>
-            {false?
-            <>
-            <Button color="inherit"> Create</Button>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 ,ml:1}}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            </>: 
-            <Box sx={{display:"inline"}}>
-                <Button color="inherit">Login </Button>
-                    <Button color="inherit">Register </Button>
-            </Box>}
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-       
+          <AsideBarM
+            setThemeMode={setThemeMode}
+            themeMode={themeMode}
+            handleOpenUserMenu={handleOpenUserMenu}
+            anchorElUser={anchorElUser}
+            handleCloseUserMenu={handleCloseUserMenu} 
+            settings={settings}
+          />
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
 export default MaxAppBar;
+
