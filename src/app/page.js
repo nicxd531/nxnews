@@ -1,4 +1,5 @@
 import { Container, Paper, Box } from "@mui/material";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home() {
   return (

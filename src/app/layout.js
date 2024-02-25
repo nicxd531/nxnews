@@ -1,5 +1,6 @@
 import ThemeRegistry from "@/components/reuseable/ThemeRegistry";
 import "./globals.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import AppBar from "../components/appbar/AppBar";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Footer from "@/components/appbar/Footer";

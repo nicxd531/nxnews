@@ -1,9 +1,12 @@
-import React from 'react'
+import { Box, Typography } from "@mui/material";
+import React from "react";
 
-function profile() {
+function ProfileArticles() {
   return (
-    <div>profile</div>
-  )
+    <Box>
+      <Typography>Home</Typography>
+    </Box>
+  );
 }
 
-export default profile
+export default ProfileArticles;

@@ -14,8 +14,9 @@ h3 {
   text-decoration: none;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  color: inherit;
+  color: inherit!important ;
   font-family: "IBM Plex Serif", Arial, Helvetica, sans-serif;
+  text-decoration: none !important;
 }
 .glass {
 /* From https://css.glass */
