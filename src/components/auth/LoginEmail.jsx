@@ -63,7 +63,7 @@ function LoginEmail({ handleClickShowPassword, handleMouseDownPassword, showPass
           label="Password2"
         />
       </FormControl>
-      <Box sx={{ display: "flex", justifyContent: "space-between" ,p:2}}>
+      <Box sx={{ display: "flex", justifyContent: "space-between" ,py:2,width:"100%"}}>
      
         <Typography> <Checkbox {...label} />Remember me?</Typography>
         <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/login">Forgot Password</Link></Button>

@@ -51,8 +51,8 @@ function LoginForm() {
                     setEmail={setEmail}
                 />
                 <Box sx={{ display: "flex", mb: 6, justifyContent: 'center', alignItems: "center" }}>
-                    <Typography>Do you already have an account ?</Typography>
-                    <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/login">Login Now</Link></Button>
+                    <Typography>Don't have an account ?</Typography>
+                    <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/register">Register here</Link></Button>
                 </Box>
             </Box>
         </Box>

@@ -44,10 +44,10 @@ function AsideBarM({
                 </> :
                 <Box sx={{ display: "inline" }}>
                     <Link href="/login">
-                        <Button color="inherit">Login </Button>
+                        <Button sx={{color:"white"}}>Login </Button>
                     </Link>
                     <Link href="/register"> 
-                        <Button color="inherit">Register </Button>
+                        <Button sx={{color:"white"}}>Register </Button>
                     </Link>
                 </Box>}
             <Menu

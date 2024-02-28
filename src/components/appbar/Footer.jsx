@@ -44,12 +44,13 @@ function Footer() {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            flexGrow: 1, mr: 6
+                            flexGrow: 1, mr: 6,
+                            textAlign:{xs:"center",lg:"start"}
                         }}
                     >
                         Nxnews
                     </Typography>
-                    <Typography sx={{ width: { xs: "100%", lg: "70%" }, lineHeight: "30px" }}>
+                    <Typography sx={{ width: { xs: "100%", lg: "70%" }, lineHeight: "30px" ,textAlign:{xs:"center",lg:"start"}}}>
                         Semper varius ac tortor dapibus id aenean nulla dictumst laoreet, suspendisse quisque erat ad torquent sem imperdiet nisi, rhoncus facilisis convallis feugiat diam himenaeos nunc non.
                     </Typography>
                 </Box>

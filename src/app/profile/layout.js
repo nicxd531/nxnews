@@ -5,9 +5,10 @@ import { Box, Divider } from "@mui/material";
 
 
 function ProfilLayout({children}) {
+ 
   return (
     <Box>
-      <Divider sx={{ mt:{xs:2, lg:6} ,display:{xs:"none",lg:"inline"}}} />
+      <Divider sx={{ mt:{xs:2, lg:6} ,display:{xs:"none",lg:"block"}}} />
       <Box sx={{ display: { lg: "none" }}}>
         <ProfileDrawerSm />
       </Box>

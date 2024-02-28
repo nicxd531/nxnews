@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -19,20 +19,28 @@ function SigninEmail({ setPassword,
   handleClickShowPassword2,
   showPassword,
   showPassword2,
-  setEmail
+  setEmail,
+  alert,
+  handleSubmit,
+  setName,
+  loading,
+  name,
+  email,
+  password,
+  confirmPassword,
 }) {
-  // main signup with email input
-  const [loading, setLoading] = React.useState(false);
+
 
   return (
-    <Box sx={{ width: "100%", display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",ml:1}} >
+    <Box sx={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", ml: 1 }} >
       <FormControl sx={{ m: 1, width: '90%', mt: 4 }} variant="outlined" >
-        <InputLabel htmlFor="outlined-adornment-email">Name</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-name">Name</InputLabel>
         <OutlinedInput
-          id="outlined-adornment-email"
-          type='email'
+          id="outlined-adornment-name"
+          type='text'
           required
-          onChange={(e) => { setEmail(e.target.value) }}
+          onChange={(e) => { setName(e.target.value) }}
+          value={name}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -46,12 +54,13 @@ function SigninEmail({ setPassword,
           label="email"
         />
       </FormControl>
-      <FormControl sx={{ m: 1, width: '90%', mt:3 }} variant="outlined" >
+      <FormControl sx={{ m: 1, width: '90%', mt: 3 }} variant="outlined" >
         <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
         <OutlinedInput
           id="outlined-adornment-email"
           type='email'
           required
+          value={email}
           onChange={(e) => { setEmail(e.target.value) }}
           endAdornment={
             <InputAdornment position="end">
@@ -66,13 +75,14 @@ function SigninEmail({ setPassword,
           label="email"
         />
       </FormControl>
-      <FormControl sx={{ m: 1, width: '90%' , mt:3}} variant="outlined">
+      <FormControl sx={{ m: 1, width: '90%', mt: 3 }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? 'text' : 'password'}
           onChange={(e) => { setPassword(e.target.value) }}
           required
+          value={password}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -88,13 +98,15 @@ function SigninEmail({ setPassword,
           label="Password"
         />
       </FormControl>
-      <FormControl sx={{ m: 1, width: '90%' , mt:3}} variant="outlined">
+      {alert && <Typography className="text-danger" sx={{ textAlign: "start", width: "100%", ml: 4 }}>{alert}</Typography>}
+      <FormControl sx={{ m: 1, width: '90%', mt: 3 }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm Password</InputLabel>
         <OutlinedInput
           id="outlined-adornment-confirm-password"
           type={showPassword2 ? 'text' : 'password'}
           required
           onChange={(e) => { setComfirmPassword(e.target.value) }}
+          value={confirmPassword}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -110,7 +122,7 @@ function SigninEmail({ setPassword,
           label="confirm password"
         />
       </FormControl>
-      <LoadingButton loading={loading} variant="contained" size="large" sx={{width:"90%",fontSize:"14px",my:2}}> <span>Register</span></LoadingButton>
+      <LoadingButton onClick={() => handleSubmit()} loading={loading} variant="contained" size="large" sx={{ width: "90%", fontSize: "14px", my: 2 }}> <span>Register</span></LoadingButton>
     </Box>
   )
 }

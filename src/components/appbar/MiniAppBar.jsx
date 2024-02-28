@@ -100,7 +100,7 @@ export default function MiniAppBar() {
                         </Link>
 
                         {
-                            themeMode == "dark" ? <IconButton onClick={() => handeleThemeChange("light")} sx={{ color: "whitesmoke" }}> <LightModeIcon /></IconButton> : <IconButton sx={{ color: "whitesmoke" }} onClick={() => handeleThemeChange("dark")}><NightlightIcon /></IconButton>
+                            themeMode == "dark" ? <IconButton onClick={() => handeleThemeChange("light")} > <LightModeIcon /></IconButton> : <IconButton  onClick={() => handeleThemeChange("dark")}><NightlightIcon /></IconButton>
                         }
 
                     </Box>}
