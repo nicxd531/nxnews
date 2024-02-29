@@ -23,7 +23,7 @@ function RegistrationForm() {
     const [alert, setAlert] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
-    const router =useRouter()
+    const router = useRouter()
 
 
     // function for handling mousedown and show password
