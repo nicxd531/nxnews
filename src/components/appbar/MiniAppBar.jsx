@@ -16,14 +16,19 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import TemporaryDrawer from "./TemporaryDrawer"
 import { useDispatch, useSelector } from 'react-redux';
-import { ChangeThemeMode } from '@/app/theme/ThemeMode';
+import { ChangeThemeMode } from '../../app/redux/ThemeMode';
 import Link from 'next/link';
-
+import { useStore } from '../../../client/context';
+import { getValue } from '../../../utils/common';
+import { signOut } from 'next-auth/react';
+import { authConstant } from '../../../client/context/constant';
 
 
 export default function MiniAppBar() {
+    const [state, dispatch] = useStore();
     const themeMode = useSelector((state) => state.theme.value);
-
+    const user = getValue(state, ["user"], null)
+    const authenticated = getValue(state, ["user", "authenticated"], false);
     const dispact = useDispatch()
     const [auth, setAuth] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,6 +46,16 @@ export default function MiniAppBar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const handleSignOut = () => {
+        handleClose()
+        signOut({
+            redirect: false
+        }).then(result => {
+            dispatch({
+                type: authConstant.LOGIN_FAILURE
+            })
+        })
+    }
     return (
         <Box sx={{ flexGrow: 1, display: { lg: "none" } }}>
             <AppBar position="static" sx={{ backgroundColor: "snow" }}>
@@ -60,7 +75,7 @@ export default function MiniAppBar() {
                             Nxnews
                         </Link>
                     </Typography>
-                    {auth ? (
+                    {authenticated ? (
                         <div>
                             <IconButton
                                 size="large"
@@ -70,7 +85,8 @@ export default function MiniAppBar() {
                                 onClick={handleMenu}
                                 color="inherit"
                             >
-                                <Avatar alt="Remy Sharp" sx={{ width: 24, height: 24 }} />
+                                <Typography sx={{ textTransform: "capitalize" }}>{user.name}</Typography>
+                                <Avatar alt={user.name} sx={{ width: 24, height: 24, ml: 1 }} />
                             </IconButton>
                             <Menu
                                 id="menu-appbar"
@@ -87,8 +103,10 @@ export default function MiniAppBar() {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem href="/profil" onClick={handleClose}>Dashboard<Box sx={{ ml: 1 }}><AccountCircleIcon /></Box></MenuItem>
-                                <MenuItem onClick={handleClose}>Logout<Box sx={{ ml: 1 }}><LogoutIcon /></Box></MenuItem>
+                                <Link href="/profile">
+                                    <MenuItem onClick={handleClose}>Dashboard<Box sx={{ ml: 1 }}><AccountCircleIcon /></Box></MenuItem>
+                                </Link>
+                                <MenuItem onClick={handleSignOut}>Logout<Box sx={{ ml: 1 }}><LogoutIcon /></Box></MenuItem>
                             </Menu>
                         </div>
                     ) : <Box>
@@ -100,7 +118,7 @@ export default function MiniAppBar() {
                         </Link>
 
                         {
-                            themeMode == "dark" ? <IconButton onClick={() => handeleThemeChange("light")} > <LightModeIcon /></IconButton> : <IconButton  onClick={() => handeleThemeChange("dark")}><NightlightIcon /></IconButton>
+                            themeMode == "dark" ? <IconButton onClick={() => handeleThemeChange("light")} > <LightModeIcon /></IconButton> : <IconButton onClick={() => handeleThemeChange("dark")}><NightlightIcon /></IconButton>
                         }
 
                     </Box>}

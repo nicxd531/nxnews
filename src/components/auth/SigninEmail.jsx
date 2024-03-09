@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, Typography } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -29,8 +29,7 @@ function SigninEmail({ setPassword,
   password,
   confirmPassword,
 }) {
-
-
+  // this form holds all the input for the registration form 
   return (
     <Box sx={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", ml: 1 }} >
       <FormControl sx={{ m: 1, width: '90%', mt: 4 }} variant="outlined" >
@@ -44,14 +43,14 @@ function SigninEmail({ setPassword,
           endAdornment={
             <InputAdornment position="end">
               <IconButton
-                aria-label="email"
+                aria-label="name"
                 edge="end"
               >
                 <AccountCircleIcon />
               </IconButton>
             </InputAdornment>
           }
-          label="email"
+          label="name"
         />
       </FormControl>
       <FormControl sx={{ m: 1, width: '90%', mt: 3 }} variant="outlined" >

@@ -26,3 +26,89 @@ backdrop-filter: blur(9.5px);
 -webkit-backdrop-filter: blur(9.5px);
 border: 1px solid rgba(255, 141, 24, 0.3);
 }
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #ff8b18b0;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+/* btn */
+.custom-class {
+  background-color: none;
+}
+ 
+/* applied to button */
+.custom-class > *[data-ut-element="button"] {
+  font-size: 1rem;
+  color: rgb(0 0 0 / 1);
+  background-color: rgb(239, 139, 68);
+}
+ 
+/* applied to button when uploading */
+.custom-class > *[data-ut-element="button"][data-state="readying"] {
+  background-color: rgba(241, 116, 7, 0.5);
+  color: rgb(0 0 0 / 0.5);
+  cursor: not-allowed;
+}
+ 
+/* applied to the button when uploading */
+.custom-class > *[data-ut-element="button"][data-state="uploading"] {
+  background-color: rgba(240, 136, 0, 0.5);
+  color: rgb(0 0 0 / 0.5);
+  cursor: not-allowed;
+}
+ 
+/* applied to the upload indicator when uploading */
+.custom-class > *[data-ut-element="button"][data-state="uploading"]::after {
+  background-color: rgb(234 88 12 / 1);
+}

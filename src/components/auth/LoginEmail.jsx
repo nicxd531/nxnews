@@ -16,13 +16,12 @@ import Checkbox from '@mui/material/Checkbox';
 
 
 
-function LoginEmail({ handleClickShowPassword, handleMouseDownPassword, showPassword, setPassword, setEmail }) {
+function LoginEmail({ handleClickShowPassword, handleMouseDownPassword, showPassword, setPassword, setEmail, loading, LoginHandler }) {
   // main email login input
   // main signup with email input
-  const [loading, setLoading] = React.useState(false);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   return (
-    <Box sx={{ width: "100%"  ,px:3}} className="d-flex flex-column justify-content-center align-items-center ">
+    <Box sx={{ width: "100%", px: 3 }} className="d-flex flex-column justify-content-center align-items-center ">
       <FormControl sx={{ m: 1, width: '100%', mt: 4 }} variant="outlined" >
         <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
         <OutlinedInput
@@ -63,12 +62,12 @@ function LoginEmail({ handleClickShowPassword, handleMouseDownPassword, showPass
           label="Password2"
         />
       </FormControl>
-      <Box sx={{ display: "flex", justifyContent: "space-between" ,py:2,width:"100%"}}>
-     
+      <Box sx={{ display: "flex", justifyContent: "space-between", py: 2, width: "100%" }}>
+
         <Typography> <Checkbox {...label} />Remember me?</Typography>
         <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/login">Forgot Password</Link></Button>
       </Box>
-      <LoadingButton loading={loading} variant="contained" size="large" sx={{ width: "100%", fontSize: "14px", ml: 1, mt: 2, mb: 2 }}> <span>Log In </span></LoadingButton>
+      <LoadingButton onClick={LoginHandler} loading={loading} variant="contained" size="large" sx={{ width: "100%", fontSize: "14px", ml: 1, mt: 2, mb: 2 }}> <span>Log In </span></LoadingButton>
     </Box>
   )
 }

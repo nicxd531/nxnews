@@ -10,6 +10,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import Link from 'next/link';
+import { useStore } from '../../../client/context';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { getValue } from '../../../utils/common';
+import { signOut } from 'next-auth/react';
+import { authConstant } from '../../../client/context/constant';
 
 function AsideBarM({
     setThemeMode,
@@ -19,6 +25,11 @@ function AsideBarM({
     handleCloseUserMenu,
     settings
 }) {
+
+    const [state, dispatch] = useStore();
+    const user = getValue(state, ["user"], null)
+    const authenticated = getValue(state, ["user", "authenticated"], false);
+
     return (
         <Box sx={{ flexGrow: 0 }}>
             <IconButton sx={{ mr: 1, color: 'white', }}>
@@ -31,23 +42,21 @@ function AsideBarM({
             <Typography variant="h5" sx={{ display: "inline", color: 'white', }}>
                 |
             </Typography>
-            {false ?
+            {authenticated ?
                 <>
-                    <Button color="inherit"> Create</Button>
+                    <Link href="/profile/CreateNews"><Button sx={{ color: "white" }}> Create</Button></Link>
                     <Tooltip title="Open settings">
-                        <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0, ml: 1 }}>
-                            <Link href="/profile">
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </Link>
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 1 }}>
+                            <Avatar alt={user.name} src="/static/images/avatar/2.jpg" />
                         </IconButton>
                     </Tooltip>
                 </> :
                 <Box sx={{ display: "inline" }}>
                     <Link href="/login">
-                        <Button sx={{color:"white"}}>Login </Button>
+                        <Button sx={{ color: "white" }}>Login </Button>
                     </Link>
-                    <Link href="/register"> 
-                        <Button sx={{color:"white"}}>Register </Button>
+                    <Link href="/register">
+                        <Button sx={{ color: "white" }}>Register </Button>
                     </Link>
                 </Box>}
             <Menu
@@ -68,8 +77,19 @@ function AsideBarM({
             >
                 {settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Link href={setting == "Dashboard" ? "/profil":"/"}>
-                             <Typography textAlign="center">{setting}</Typography>
+                        <Link
+                            href={setting == "Dashboard" ? "/profile" : ""}
+                            onClick={() => {
+                                setting == "Dashboard" ? null : signOut({
+                                    redirect: false
+                                }).then(result => {
+                                    dispatch({
+                                        type: authConstant.LOGIN_FAILURE
+                                    })
+                                })
+                            }}>
+                            {setting == "Dashboard" ? <AccountCircleIcon /> : <LogoutIcon />}
+                            <Typography sx={{display:"inline",ml:1}} textAlign="center">{setting}</Typography>
                         </Link>
                     </MenuItem>
                 ))}

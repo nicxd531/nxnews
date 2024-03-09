@@ -25,7 +25,6 @@ export  async  function POST(req){
             await dbConnect()
     
             const hashPassword = await bcrypt.hash(password, 8)
-            console.log(hashPassword)
             const user = new User({...body,password:hashPassword});
             const saveUser = await user.save()
             if(saveUser){
@@ -33,7 +32,6 @@ export  async  function POST(req){
                 const userDoc= saveUser._doc
                 delete userDoc.password
                 const main =responsehandler(userDoc)
-                console.log(main)
                return new Response(JSON.stringify(main))
             }else{
               const error= errorhandler("something went wrong")

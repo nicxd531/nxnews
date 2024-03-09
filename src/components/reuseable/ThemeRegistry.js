@@ -3,8 +3,9 @@
 import createCache from '@emotion/cache';
 import { useServerInsertedHTML } from 'next/navigation';
 import { CacheProvider, ThemeProvider } from '@emotion/react';
-import { theme } from '@/app/theme/theme';
 import React from 'react';
+import { createTheme } from "@mui/material";
+
 
 
 // This implementation is from emotion-js
@@ -12,7 +13,7 @@ import React from 'react';
 export default function ThemeRegistry({
     children
 }) {
-
+    const [themeMode ,setThemeMode]=React.useState("light")
     const options = { key: "mui" }
     const [{ cache, flush }] = React.useState(() => {
         const cache = createCache(options);
@@ -33,7 +34,7 @@ export default function ThemeRegistry({
         };
         return { cache, flush };
     });
-
+    
     useServerInsertedHTML(() => {
         const names = flush();
         if (names.length === 0) {
@@ -53,7 +54,13 @@ export default function ThemeRegistry({
             />
         );
     });
-
+    const theme = createTheme({
+        palette: {
+          primary:{ main:"#ff8b18b0"},
+          mode: themeMode,
+        },
+      });
+      
     return (
         <CacheProvider value={cache}>
             <ThemeProvider theme={theme}>

@@ -3,14 +3,27 @@ import { Box, Button, Typography } from '@mui/material'
 import React from 'react'
 import Link from 'next/link';
 import LoginEmail from './LoginEmail';
+import Alert from '@mui/material/Alert';
+import { getSession, signIn } from "next-auth/react"
+import { useRouter } from 'next/navigation';
+import { authConstant } from '../../../client/context/constant';
+import { useStore } from '../../../client/context';
+import { getValue } from '../../../utils/common';
+
+
 
 
 function LoginForm() {
 
     const [email, setEmail] = React.useState("");
     const [alert, setAlert] = React.useState(false);
-    const [Password, setPassword] = React.useState("");
+    const [password, setPassword] = React.useState("");
     const [loading, setLoading] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState(false);
+    const router =useRouter()
+    const [state,dispatch]=useStore()
+    const user = getValue(state,["user"],null)
+
     // this is the componnent for logging into the app
     // states  for handling show password 
     const [showPassword, setShowPassword] = React.useState(false);
@@ -20,7 +33,41 @@ function LoginForm() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+   
+    const LoginHandler = async (e)=>{
+        e.preventDefault()
+        setErrorMessage(false)
+        setLoading(true)
+        const payload ={email,password}
+        dispatch({type:authConstant.LOGIN_REQUEST})
+        try{
+         const result =   await signIn("credentials",{...payload,redirect:false});
+         console.log(result)
+         const session = await getSession()
+        //  console.log({session})
+         if(result.error){
+            dispatch({type:authConstant.LOGIN_FAILURE,
+                payload:result.error
+            })
+            setErrorMessage(result.error)
+         }else if(!result.error){
+            dispatch({type:authConstant.LOGIN_SUCCESS,
+                payload:session
+            })
+            setErrorMessage("Log in sucessful")
 
+            router.replace('/')
+         }
+
+         setLoading(false)
+        }
+        catch(err){
+
+            console.log(err)
+        }
+        setLoading(false)
+
+    }
     return (
         <Box sx={{width:{xs:"100%",lg:"40%"}}}>
             <Box sx={{ maxWidth: { xs: "350px", lg: "400px" }, border: "1px solid black", mt: { xs: 3, lg: 6 }, mx: "auto", pr: 2}}>
@@ -43,15 +90,20 @@ function LoginForm() {
                         Nxnews
                     </Link>
                 </Typography>
+                {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                <Alert severity={errorMessage == "Log in sucessful" ?"success":"error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
+            </Box>}
                 <LoginEmail
                     handleClickShowPassword={handleClickShowPassword}
                     handleMouseDownPassword={handleMouseDownPassword}
                     showPassword={showPassword}
                     setPassword={setPassword}
                     setEmail={setEmail}
+                    loading={loading}
+                    LoginHandler={LoginHandler}
                 />
                 <Box sx={{ display: "flex", mb: 6, justifyContent: 'center', alignItems: "center" }}>
-                    <Typography>Don't have an account ?</Typography>
+                    <Typography>Dont have an account ?</Typography>
                     <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/register">Register here</Link></Button>
                 </Box>
             </Box>

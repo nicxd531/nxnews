@@ -1,11 +1,20 @@
+"use client"
 import React from 'react'
-import ProfileDrawerSm from "@/components/reuseable/ProfileDrawerSm";
-import ProfilePanel from "@/components/reuseable/ProfilePanel";
+import ProfileDrawerSm from "../../components/profile/ProfileDrawerSm";
+import ProfilePanel from "../../components/profile/ProfilePanel";
 import { Box, Divider } from "@mui/material";
-
+import { useRouter } from 'next/navigation';
+import { getSession} from "next-auth/react"
 
 function ProfilLayout({children}) {
- 
+  const router =useRouter()
+  const verify = async ()=>{
+    const session = await getSession()
+    if(!session){
+      router.replace('/')
+    }
+  }
+  verify()
   return (
     <Box>
       <Divider sx={{ mt:{xs:2, lg:6} ,display:{xs:"none",lg:"block"}}} />
@@ -18,12 +27,12 @@ function ProfilLayout({children}) {
           orientation="vertical"
           variant="inset"
           sx={{
-            minHeight: "120vh",
+            minHeight: "140vh",
             display: { xs: "none", lg: "inline" },
             ml: 0,
           }}
         />
-        <Box>
+        <Box sx={{width:{xs:"100%",lg:"80%"}}}> 
             {children}
         </Box>
       </Box>

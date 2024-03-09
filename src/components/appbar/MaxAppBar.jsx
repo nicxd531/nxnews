@@ -34,7 +34,7 @@ function MaxAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ display: { xs: "none", lg: "inline" }, bgcolor: "#e59a4d" }}>
+    <AppBar position="static" sx={{ display: { xs: "none", lg: "inline" }, bgcolor: "snow" }}>
       <Container maxWidth="xl" className="glass">
         <Toolbar
           disableGutters

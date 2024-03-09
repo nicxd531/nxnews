@@ -34,7 +34,7 @@ function ProfilePanel() {
             <Box>
                 <Box sx={{ display: "flex", mt: 2 }}>
                     <PeopleIcon sx={{mr:1}}/>
-                    <Typography>23<span className='text-muted  ms-1'>Follower</span> </Typography>
+                    <Typography>23<span className='text-muted  ms-1'>Followers</span> </Typography>
                     <Typography sx={{ ml: 2 }}>40<span className='text-muted ms-1'>Following</span> </Typography>
                 </Box>
                 <Box sx={{ mt: 4 }}>

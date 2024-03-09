@@ -44,7 +44,7 @@ function Footer() {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            flexGrow: 1, mr: 6,
+                            flexGrow: 1, mr: {xs:0,lg:6},
                             textAlign:{xs:"center",lg:"start"}
                         }}
                     >
@@ -57,7 +57,7 @@ function Footer() {
                 {data.map((data, index) => {
                     return (
                         <Box key={index} sx={{ display: "flex", textAlign: { xs: "center", lg: "Start" }, flexDirection: "column", flexGrow: 1 }}>
-                            <Typography variant="h6" sx={{ fontWeight: "bold", ml: 1 }}>{data.title}</Typography>
+                            <Typography variant="h6" sx={{ fontWeight: "bold", ml: {xs:0,lg:1} }}>{data.title}</Typography>
                             <Box sx={{ display: "flex", textAlign: "center", flexDirection: { xs: "row", lg: "column" }, justifyContent: { xs: "center", lg: "Start" }, alignItems: "start" }}>
                                 {data.content.map((data, index) => <IconButton sx={{ color: "whitesmoke" }} key={index}><Typography >{data}</Typography></IconButton>)}
                             </Box>
