@@ -1,8 +1,8 @@
-import RegistrationForm from '@/components/auth/RegistrationForm'
-import HotTopics from '@/components/reuseable/HotTopics'
+import RegistrationForm from '../../../components/auth/RegistrationForm'
+import HotTopics from '../../../components/reuseable/HotTopics'
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import RegisterMiddleMan from '@/components/auth/RegisterMiddleMan'
+import RegisterMiddleMan from '../../../components/auth/RegisterMiddleMan'
 
 function Register() {
   // main page for registring users

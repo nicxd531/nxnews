@@ -3,7 +3,7 @@ import { baseUrl } from "./config"
 import { errorhandler, getValue } from "../utils/common"
 
 
-
+// sign up function for handing api connection and sending request
 export const signUp = async (payload)=>{
     try{
         const res = await axios.post(baseUrl+`/signup`,payload)

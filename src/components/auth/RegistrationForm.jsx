@@ -24,6 +24,7 @@ function RegistrationForm() {
     const [loading, setLoading] = React.useState(false);
     const router = useRouter()
     const [state] = useStore()
+    // get user
     const user = getValue(state, ["user"], null)
     // function for handling mousedown and show password
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -33,6 +34,7 @@ function RegistrationForm() {
     };
     // handle submit button for registration
     const handleSubmit = async (e) => {
+        setErrorMessage(false)
         // e.preventDefault();
         if (password === confirmPassword) {
             setLoading(true)
