@@ -13,6 +13,7 @@ export const signUp = async (payload)=>{
 // create post function for handling post creation and sending request to the server
 export const CreatePost = async (form)=>{
     try{
+       
         const res = await axios.post(baseUrl+`/post/create`,form)
         return res.data
     }catch(error){

@@ -2,9 +2,10 @@
 import React from 'react'
 import { Box, TextField, Typography } from '@mui/material'
 import { UploadButton } from '../../../utils/uploadthing';
+import Select from "./Select"
 
-
-function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage }) {
+function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage,categories,setCategories }) {
+  // main Header component
   const [err,setErr]=React.useState("")
   return (
     <Box>
@@ -15,6 +16,7 @@ function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage }) {
         onChange={(e) => setMainH(e.target.value)}
 
       />
+       <Select setCategories={setCategories} categories={categories}/>
       <Box
         sx={{
           width: "100%",

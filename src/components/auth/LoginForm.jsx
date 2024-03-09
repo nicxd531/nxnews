@@ -33,7 +33,6 @@ function LoginForm() {
         setErrorMessage(false)
         setLoading(true)
         const payload = { email, password }
-        console.log(payload)
         dispatch({ type: authConstant.LOGIN_REQUEST })
         try {
             const result = await signIn("credentials", { ...payload, redirect: false });

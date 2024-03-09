@@ -10,7 +10,7 @@ import Loading from '../../.././components/reuseable/Loading'
 import { getSession } from "next-auth/react"
 
 
-function LogIn() {
+function  LogIn() {
   // login main page
   // states ,get user constant and router
   const [state, dispatch] = useStore()
