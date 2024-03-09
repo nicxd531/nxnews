@@ -1,3 +1,4 @@
+// error handling function
 export const errorhandler=(data)=>{
    const  error={
         hasError:true,
@@ -5,7 +6,7 @@ export const errorhandler=(data)=>{
     }
     return error
 }
-
+// response handler function
 export const responsehandler=(data)=>{
     const newData={
         hasError:false,
@@ -13,8 +14,7 @@ export const responsehandler=(data)=>{
     }
     return newData
 }
-
-
+// validation function
 export const validateAllOnce = (fields)=>{
     for (let key in fields){
         if (fields[key].trim() === ""){
@@ -23,8 +23,7 @@ export const validateAllOnce = (fields)=>{
         }
     }
 }
-
-
+// get value function
 export const getValue =(obj,path,defaultValue)=>{
     try{
 

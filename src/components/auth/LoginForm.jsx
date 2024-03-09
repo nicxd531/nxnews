@@ -11,66 +11,59 @@ import { useStore } from '../../../client/context';
 import { getValue } from '../../../utils/common';
 
 
-
-
 function LoginForm() {
-
+    // components for input fields
+    // states 
     const [email, setEmail] = React.useState("");
-    const [alert, setAlert] = React.useState(false);
     const [password, setPassword] = React.useState("");
     const [loading, setLoading] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState(false);
-    const router =useRouter()
-    const [state,dispatch]=useStore()
-    const user = getValue(state,["user"],null)
-
-    // this is the componnent for logging into the app
-    // states  for handling show password 
+    const router = useRouter()
+    const [state, dispatch] = useStore()
+    const user = getValue(state, ["user"], null)
     const [showPassword, setShowPassword] = React.useState(false);
-    // distructed custom hook for getting name and profile photo
     // functions for handling mouse down and showing password 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-   
-    const LoginHandler = async (e)=>{
+    // login handler
+    const LoginHandler = async (e) => {
         e.preventDefault()
         setErrorMessage(false)
         setLoading(true)
-        const payload ={email,password}
-        dispatch({type:authConstant.LOGIN_REQUEST})
-        try{
-         const result =   await signIn("credentials",{...payload,redirect:false});
-         console.log(result)
-         const session = await getSession()
-        //  console.log({session})
-         if(result.error){
-            dispatch({type:authConstant.LOGIN_FAILURE,
-                payload:result.error
-            })
-            setErrorMessage(result.error)
-         }else if(!result.error){
-            dispatch({type:authConstant.LOGIN_SUCCESS,
-                payload:session
-            })
-            setErrorMessage("Log in sucessful")
+        const payload = { email, password }
+        console.log(payload)
+        dispatch({ type: authConstant.LOGIN_REQUEST })
+        try {
+            const result = await signIn("credentials", { ...payload, redirect: false });
+            const session = await getSession()
+            if (result.error) {
+                dispatch({
+                    type: authConstant.LOGIN_FAILURE,
+                    payload: result.error
+                })
+                setErrorMessage(result.error)
+            } else if (!result.error) {
+                dispatch({
+                    type: authConstant.LOGIN_SUCCESS,
+                    payload: session
+                })
+                setErrorMessage("Log in sucessful")
 
-            router.replace('/')
-         }
-
-         setLoading(false)
+                router.replace('/')
+            }
+            setLoading(false)
         }
-        catch(err){
+        catch (err) {
 
             console.log(err)
         }
         setLoading(false)
-
     }
     return (
-        <Box sx={{width:{xs:"100%",lg:"40%"}}}>
-            <Box sx={{ maxWidth: { xs: "350px", lg: "400px" }, border: "1px solid black", mt: { xs: 3, lg: 6 }, mx: "auto", pr: 2}}>
+        <Box sx={{ width: { xs: "100%", lg: "40%" } }}>
+            <Box sx={{ maxWidth: { xs: "350px", lg: "400px" }, border: "1px solid black", mt: { xs: 3, lg: 6 }, mx: "auto", pr: 2 }}>
                 <Typography
                     variant="h4"
                     noWrap
@@ -91,8 +84,8 @@ function LoginForm() {
                     </Link>
                 </Typography>
                 {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                <Alert severity={errorMessage == "Log in sucessful" ?"success":"error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
-            </Box>}
+                    <Alert severity={errorMessage == "Log in sucessful" ? "success" : "error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
+                </Box>}
                 <LoginEmail
                     handleClickShowPassword={handleClickShowPassword}
                     handleMouseDownPassword={handleMouseDownPassword}

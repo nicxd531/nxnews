@@ -14,8 +14,6 @@ import Link from 'next/link';
 import Checkbox from '@mui/material/Checkbox';
 
 
-
-
 function LoginEmail({ handleClickShowPassword, handleMouseDownPassword, showPassword, setPassword, setEmail, loading, LoginHandler }) {
   // main email login input
   // main signup with email input
