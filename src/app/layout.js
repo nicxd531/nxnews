@@ -6,6 +6,7 @@ import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Footer from "../components/appbar/Footer";
 import { StoreProvider } from "../../client/context";
 import "@uploadthing/react/styles.css";
+import { dbConnect } from "../../lib/db-connect";
 
 export const metadata = {
   title: "Nxnews",

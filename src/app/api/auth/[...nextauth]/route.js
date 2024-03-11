@@ -44,7 +44,7 @@ const authOptions = {
 
   callbacks: {
     async session({ session, user, token }) {
-      console.log("session", { token });
+      // console.log("session", { token });
       if (token && token.id) {
         session.user.id = token.id;
       }
@@ -54,7 +54,7 @@ const authOptions = {
       if (user && user._id) {
         token.id = user._id;
       }
-      console.log("jwt", { token });
+      // console.log("jwt", { token });
       return token;
     },
   },

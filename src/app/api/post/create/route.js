@@ -2,12 +2,6 @@ import { errorhandler, responsehandler, validateAllOnce } from "../../../../../u
 import Post from "../../../../../models/Post";
 import slugify from "slugify";
 import { dbConnect } from "../../../../../lib/db-connect";
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
-
 
 
 export async function POST(req, ctx) {

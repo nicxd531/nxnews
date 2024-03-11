@@ -21,5 +21,16 @@ export const CreatePost = async (form)=>{
     }
 }
  
+// get user post function for handling post creation and sending request to the server
+export const getUserPost = async (payload)=>{
+    console.log(payload)
+    try{
+        const res = await axios.post(baseUrl+`/post/user`,payload)
+        return res.data
+    }catch(error){
+        return errorhandler(error)
+    }
+}
+ 
 
  
