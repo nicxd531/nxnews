@@ -9,7 +9,7 @@ export async function POST(req) {
     // converting request and distructuring body
     await dbConnect();
     const body = await req.json();
-    console.log(body)
+
     const { userId }= body
     const posts = await Post.find({user:userId} ).select("slug mainHeading categories likes cP mainImage createdAt").exec();
     if(posts){
@@ -17,7 +17,8 @@ export async function POST(req) {
         return new Response(JSON.stringify(result));
     }
   } catch (error) {
-    const err = errorhandler({ error, body });
+    const err = errorhandler(error );
+    console.log(err,"this is the session")
     return new Response(JSON.stringify(err));
   }
  

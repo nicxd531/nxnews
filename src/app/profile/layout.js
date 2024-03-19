@@ -17,7 +17,7 @@ function ProfilLayout({children}) {
   verify()
   return (
     <Box>
-      <Divider sx={{ mt:{xs:2, lg:6} ,display:{xs:"none",lg:"block"}}} />
+      <Divider sx={{ mt:{xs:2, lg:6} ,display:{xs:"none",lg:"block"},bgcolor:"grey"}} />
       <Box sx={{ display: { lg: "none" }}}>
         <ProfileDrawerSm />
       </Box>
@@ -29,7 +29,8 @@ function ProfilLayout({children}) {
           sx={{
             minHeight: "140vh",
             display: { xs: "none", lg: "inline" },
-            ml: 0,
+            ml: 0
+            ,bgcolor:"grey"
           }}
         />
         <Box sx={{width:{xs:"100%",lg:"80%"}}}> 

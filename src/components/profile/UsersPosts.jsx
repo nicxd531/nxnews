@@ -2,45 +2,61 @@ import { Box, Button, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-
 import React from 'react'
+import { deletePost } from '../../../client/request';
+import Link from 'next/link';
 
-function UsersPosts({ data }) {
-    const colour = "sports"
-    let bgColor 
-    if(colour== "sports"){
-        bgColor ="#ffde37"
-    }else if(colour== "Health"){
-        bgColor ="#b64aef"
-    }else if(colour== "political"){
-        bgColor ="#d83c3c"
-    }else if(colour== "business"){
-        bgColor ="#54e0e2"
-    }else if(colour== "finence"){
-        bgColor ="#df7c20"
-    }else if(colour== "life"){
-        bgColor ="#28d01a"
-    }else if(colour== "entertainment"){
+function UsersPosts({ data,revalidate,setRevalidate }) {
+    function truncateText(text, maxLength) {
+        return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    }
+    // Usage example
+    const longText = data.cP
+    const truncatedText = truncateText(longText, 100); // Truncate to 20 characters
+    const colour = data.categories
+    let bgColor
+    if (colour == "Sport") {
+        bgColor = "#ffde37"
+    } else if (colour == "Health") {
+        bgColor = "#b64aef"
+    } else if (colour == "Political") {
+        bgColor = "#d83c3c"
+    } else if (colour == "Business") {
+        bgColor = "#54e0e2"
+    } else if (colour == "Finance") {
+        bgColor = "#df7c20"
+    } else if (colour == "Life") {
+        bgColor = "#28d01a"
+    } else if (colour == "Entertainment") {
         bgColor = "#814de5"
     }
+    const HandleDelate = (id)=>{
+        deletePost(id) 
+        setRevalidate(revalidate+1)
+        
+    }
+    const  date = new Date(data?.createdAt).toLocaleDateString()
+    console.log(data?.createdAt,"date")
     return (
-        <Box sx={{ p: { xs: 2, lg: 4 } }}>
-            <Box sx={{width:{xs:"45%",lg:"25%"},position:"relative"}}>
-                <Box sx={{position:"relative",width:"100%",height:"120px",objectFit:'cover'}}>
-                    <Box sx={{overFlow:"hidden",width:"100%",height:"100%"}}>
-                         <img src="/images/no image.avif" alt="post image" style={{objectFit:'cover',width:"100%",height:"100%",overFlow:"hidden"}} />
+        <Box sx={{ width: { xs: "100%", lg: "32%" }, mt: 4 ,height:"100%"}}>
+            <Box sx={{ position: "relative" }}>
+                <Box sx={{ position: "relative", width: "100%", height: "170px", objectFit: 'cover' }}>
+                    <Box sx={{ overFlow: "hidden", width: "100%", height: "100%" }}>
+                        <img src={data.mainImage ? data.mainImage : "/images/no image.avif"} alt="post image" style={{ objectFit: 'cover', width: "100%", height: "100%", overFlow: "hidden" }} />
                     </Box>
-                    <Box sx={{height:"25px",backgroundColor:bgColor ,position:"absolute",top:0,right:0,mr:1,mt:1,p:1}}><Typography sx={{textTransform:"capitalize",fontSize:{xs:"0.8rem",lg:"0.9rem"}}}> entertinment</Typography></Box>
-                    <Typography sx={{position:"absolute",bottom:0,mb:1,ml:1}}>Ukraine, 24 april 2022</Typography>
+                    {data.categories && <Box sx={{ height: "25px", backgroundColor: bgColor, position: "absolute", top: 0, right: 0, mr: 1, mt: 1, p: 1, color: "whitesmoke",textAlign:"center",display:"flex",justifyContent:"center",alignItems:"center", px:2}}><Typography sx={{ textTransform: "capitalize", fontSize: { xs: "1rem", lg: "1rem" }}}> {data.categories}</Typography></Box>}
+                    <Typography sx={{ position: "absolute", bottom: 0, mb: 1, ml: 1, fontSize: { xs: "0.9rem", lg: "1rem" }, color: "whitesmoke" }}>Ukraine, {new Date(data?.createdAt).toLocaleDateString()}</Typography>
                 </Box>
-                <Typography> Lorem ipsum. Lorem ipsum.</Typography>
-                <Typography sx={{fontSize:{xs:"0.9rem"},textAlign:"justify" ,mt:1}}>Lorem ipsum dolor sit amet consectetur adipiscing elit tristique nam nunc, himenaeos sapien in interdum lectus eros potenti rutrum sed, justo bibendum eleifend mattis nullam platea facilisis taciti suscipit. </Typography>
-                <Box className="d-flex" sx={{mt:2,justifyContent:"space-between",alignItems:"center"}}>
-                    <Button variant='contained' sx={{backgroundColor:"#000000",color:"whitesmoke" ,fontSize:{xs:"0.7rem"},p:1}}> read more <ArrowOutwardIcon/></Button>
-                    <Typography className="text-muted" sx={{fontSize:"1rem"}}>likes 15k</Typography>
-                    <IconButton aria-label="delete">
-                        <DeleteIcon />
+                <Box sx={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"100%"}}>
+                {data.mainHeading && <Typography  variant='h5' sx={{ fontWeight: "bold" ,width:"100%"}}> {data.mainHeading}</Typography>}
+                <Typography sx={{ fontSize: { xs: "0.9rem" }, textAlign: "justify", mt: 1 }}>{truncatedText}</Typography>
+                <Box className="d-flex" sx={{ mt: 2, justifyContent: "space-between", alignItems: "center" }}>
+                    <Button variant='contained' sx={{ backgroundColor: "#000000", color: "whitesmoke", fontSize: { xs: "0.7rem" }, p: 1 }}> <Link href={`/post/${data?._id}/${data?.slug}`}>read more <ArrowOutwardIcon /></Link> </Button>
+                    <Typography className="text-muted" sx={{ fontSize: "1rem" }}>likes {data.likes.lenght ? data.likes.lengh : 0}</Typography>
+                    <IconButton aria-label="delete" onClick={()=>HandleDelate(data._id)}>
+                        <DeleteIcon className="deleteIcon"/>
                     </IconButton>
+                </Box>
                 </Box>
 
             </Box>

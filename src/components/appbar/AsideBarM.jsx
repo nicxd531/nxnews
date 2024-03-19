@@ -16,6 +16,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { getValue } from '../../../utils/common';
 import { signOut } from 'next-auth/react';
 import { authConstant } from '../../../client/context/constant';
+import SearchAppBar from "./SearchAppBar"
+import React from 'react';
+import { Divider } from '@mui/material';
+
 
 function AsideBarM({
     setThemeMode,
@@ -27,20 +31,22 @@ function AsideBarM({
 }) {
 
     const [state, dispatch] = useStore();
+    const [search, setSearch] = React.useState(false);
     const user = getValue(state, ["user"], null)
     const authenticated = getValue(state, ["user", "authenticated"], false);
 
     return (
         <Box sx={{ flexGrow: 0 }}>
-            <IconButton sx={{ mr: 1, color: 'white', }}>
-                <SearchIcon sx={{ width: 20, height: 20 }} />
+            {search && <SearchAppBar />}
+            <IconButton sx={{ mr: 1, color: 'white', }} onClick={() => setSearch(!search)}>
+                <SearchIcon sx={{ width: 20, height: 20 }}  />
             </IconButton>
             {
                 themeMode == "dark" ? <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => setThemeMode("light")}> <LightModeIcon /> </IconButton> : <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => setThemeMode("dark")}><NightlightIcon /></IconButton>
             }
 
             <Typography variant="h5" sx={{ display: "inline", color: 'white', }}>
-                |
+                <Divider sx={{ height: 10, display: "inline", width: 5, color: "white" }} orientation="vertical" />
             </Typography>
             {authenticated ?
                 <>
@@ -89,7 +95,7 @@ function AsideBarM({
                                 })
                             }}>
                             {setting == "Dashboard" ? <AccountCircleIcon /> : <LogoutIcon />}
-                            <Typography sx={{display:"inline",ml:1}} textAlign="center">{setting}</Typography>
+                            <Typography sx={{ display: "inline", ml: 1 }} textAlign="center">{setting}</Typography>
                         </Link>
                     </MenuItem>
                 ))}

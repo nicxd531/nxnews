@@ -23,9 +23,29 @@ export const CreatePost = async (form)=>{
  
 // get user post function for handling post creation and sending request to the server
 export const getUserPost = async (payload)=>{
-    console.log(payload)
+    
     try{
         const res = await axios.post(baseUrl+`/post/user`,payload)
+        return res.data
+    }catch(error){
+        return errorhandler(error)
+    }
+}
+// get user post function for handling post creation and sending request to the server
+export const deletePost = async (payload)=>{
+    try{
+        const res = await axios.delete(baseUrl+`/post/user/delete/${payload}`)
+        return res.data
+    }catch(error){
+        return errorhandler(error)
+    }
+}
+ 
+// get user post function for handling post creation and sending request to the server
+export const getSinglePost = async (id)=>{
+    console.log(id,"from request")
+    try{
+        const res = await axios.get(baseUrl+`/post/singlePost/${id}`)
         return res.data
     }catch(error){
         return errorhandler(error)

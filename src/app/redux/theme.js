@@ -9,6 +9,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
+const grey ="grey"
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],

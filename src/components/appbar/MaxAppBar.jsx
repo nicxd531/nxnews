@@ -10,7 +10,7 @@ import AsideBarM from './AsideBarM';
 import Link from 'next/link';
 
 
-const pages = ['Sport', 'Health', 'Political', 'Business', 'Finance', "Life", "Entertainment"];
+const pages = ['sport', 'health', 'political', 'business', 'finance', "life", "entertainment"];
 const settings = ['Dashboard', 'Logout'];
 
 function MaxAppBar() {
@@ -60,13 +60,14 @@ function MaxAppBar() {
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: "flex" }}>
-            {pages.map((page) => (
+            {pages?.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <Link href={`/${page}`}>{page}</Link>
+                
               </Button>
             ))}
           </Box>

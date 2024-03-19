@@ -26,7 +26,7 @@ export async function POST(req, ctx) {
         const slug = slugify(body.mainHeading,{remove:/[*+~.()'"!:@]/g})
         const post = new Post({
           ...body,
-          slug,
+          slug:slug.toLowerCase(),
         });
         const savePost = await post.save();
         if(savePost){

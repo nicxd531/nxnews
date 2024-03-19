@@ -30,7 +30,7 @@ function ProfilePanel() {
                 </Box>
 
             </Box>
-            <Divider />
+            <Divider sx={{bgcolor:"gray"}} />
             <Box>
                 <Box sx={{ display: "flex", mt: 2 }}>
                     <PeopleIcon sx={{mr:1}}/>
@@ -46,7 +46,7 @@ function ProfilePanel() {
                     <Box sx={{ display: "flex", mt: 1 }}><XIcon sx={{ mr: 2 }} /><Typography variant='h6'>Twitter</Typography></Box>
                     <Box sx={{ display: "flex", mt: 1 }}><InstagramIcon sx={{ mr: 2 }} /><Typography variant='h6'> Instagram</Typography></Box>
                 </Box>
-                <Divider variant='inset' sx={{ ml: 0, mt: 2 }} />
+                <Divider variant='inset' sx={{ ml: 0, mt: 2,bgcolor:"gray" }} />
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <Link href="/profile" > <Button onClick={() => setActive("post")} variant={active == "post" ? "contained" : "outlined"} sx={{ p: 1, mt: 2,width:"100%" }}>Articles</Button></Link>
                     <Link href="/profile/EditProfile"> <Button onClick={() => setActive("edit")} variant={active == "edit" ? "contained" : "outlined"} sx={{ p: 1, width: "100%", mt: 2 }}>Edit Profile</Button></Link>

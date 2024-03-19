@@ -38,6 +38,7 @@ function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage,categories,
         className="custom-class" 
         endpoint='imageUploader'
           onClientUploadComplete={(res) => {
+            setErr(false)
             console.log("Files: ", res);
             setMainImage(res[0].url)
           }}
