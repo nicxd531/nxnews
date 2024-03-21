@@ -23,7 +23,6 @@ function AppBar() {
     const [state, dispatch] = useStore();
     React.useEffect(() => {
         const authenticated = getValue(state, ["user", "authenticated"], false);
-        console.log(authenticated,"auth")
         const check = async () => {
             if (!authenticated) {
                 console.log("layou=>", authenticated)

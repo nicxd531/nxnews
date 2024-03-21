@@ -6,12 +6,13 @@ import { UploadButton } from '../../../utils/uploadthing';
 
 
 
-function HeadingsTemplate({ setP, pData, H, setH, image, setImage}) {
+function HeadingsTemplate({ setP, pData, H, setH, image, setImage }) {
+    // headings template for create new post page
     const [err, setErr] = React.useState("")
     return (
         <Box sx={{ m: { xs: 1, lg: 4 } }}>
-            <Typography variant="h5" sx={{textAlign:"center",textTransform:"capitalize"}}>add new paragraph</Typography>
-            <Divider variant="inset" sx={{mb:1,ml:0}}/>
+            <Typography variant="h5" sx={{ textAlign: "center", textTransform: "capitalize" }}>add new paragraph</Typography>
+            <Divider variant="inset" sx={{ mb: 1, ml: 0 }} />
             <TextField fullWidth label="Heading " id="fullWidth" sx={{ mt: 1 }} onChange={e => setH(e.target.value)} />
             <TextField
                 id="filled-multiline-static"

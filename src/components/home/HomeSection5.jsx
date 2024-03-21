@@ -29,7 +29,7 @@ function HomeSection5({ post }) {
               <SwiperSlide key={index} style={{ position: "relative" }}>
                 <img src={data.mainImage} alt='post image' sx={{ width: "100%", height: "100%" }} />
                 <Box sx={{ position: "absolute",top:280,left:50,width:{lg:"30%"} ,textAlign:"start"}}>
-                  <Typography sx={{ display: "flex", alignItems: "center", fontSize: { xs: "0.8rem", lg: "1.2rem" }, mb: { xs: 1, lg: 3 } }}><Box sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "red", borderRadius: "50%", marginRight: "6px" }}></Box> {data.categories} Topic</Typography>
+                  <Typography sx={{ display: "flex", alignItems: "center", fontSize: { xs: "0.8rem", lg: "1.2rem" }, mb: { xs: 1, lg: 3 } }}><Box component="span" sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "red", borderRadius: "50%", marginRight: "6px" }}></Box> {data.categories} Topic</Typography>
                   <Typography variant="h3" sx={{ width: "100%", mb: 4 }}>{data.mainHeading}</Typography>
                   <Button variant="outlined" sx={{ color: "white", borderColor: "white", fontSize: "1rem", textTransform: "capitalize" }}> Read More</Button>
                 </Box>

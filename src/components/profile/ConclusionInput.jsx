@@ -2,11 +2,11 @@ import { Box, TextField, Divider, Typography } from '@mui/material'
 import React from 'react'
 
 function ConclusionInput({ cH, setCH, cP, setCP }) {
-  // conclusion component
+  // conclusion input  component for create new post page
   return (
     <Box sx={{ m: 2 }}>
       <Typography variant="h5" sx={{ textAlign: "center", textTransform: "capitalize" }}>add conclusion</Typography>
-      <Divider variant="inset" sx={{mb:2,ml:0}}/>
+      <Divider variant="inset" sx={{ mb: 2, ml: 0 }} />
       <TextField fullWidth value={cH} label="Conclusion Heading" id="fullWidth" onChange={e => setCH(e.target.value)} />
       <TextField
         id="filled-multiline-static"

@@ -1,28 +1,26 @@
 import { dbConnect } from "../../../../../../../lib/db-connect";
 import Post from "../../../../../../../models/Post";
-import { errorhandler, responsehandler } from "../../../../../../../utils/common";
+import {
+  errorhandler,
+  responsehandler,
+} from "../../../../../../../utils/common";
 
-
-
-export async function DELETE(req,{params}) {
+export async function DELETE(req, { params }) {
+  // function for deleting post
   try {
-    // converting request and distructuring body
+    // converting request and distructuring body,connectin to data based,find post and delete it 
     await dbConnect();
-    const body =  params
-    console.log(body,"from api")
-    
-    
-
-    const { id }= body
-    const posts = await Post.deleteOne({ _id:id })
-    if(posts){
-        const result =responsehandler({posts})
-        return new Response(JSON.stringify(result));
+    const body = params;
+    const { id } = body;
+    const posts = await Post.deleteOne({ _id: id });
+    // if post is deleted ,handle the result and return the 
+    if (posts) {
+      const result = responsehandler({ posts });
+      return Response.json(result);
     }
   } catch (error) {
-    const err = errorhandler(error );
-    console.log(err,"this is the session")
-    return new Response(JSON.stringify(err));
+    // if error occurs handle it and return it 
+    const err = errorhandler(error);
+    return Response.json(err);
   }
 }
- 

@@ -1,6 +1,6 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "../../../../../models/user";
+import User from "../../../../../models/User";
 import bcrypt from "bcryptjs";
 import { dbConnect } from "../../../../../lib/db-connect";
 import { validateAllOnce } from "../../../../../utils/common";
@@ -44,17 +44,18 @@ const authOptions = {
 
   callbacks: {
     async session({ session, user, token }) {
-      // console.log("session", { token });
+      // check if token and token.id is available
       if (token && token.id) {
         session.user.id = token.id;
       }
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
+      // if user and use._id is available
       if (user && user._id) {
         token.id = user._id;
       }
-      // console.log("jwt", { token });
+      // return token;
       return token;
     },
   },

@@ -1,3 +1,5 @@
+"use client"
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -14,11 +16,11 @@ import { useStore } from '../../../client/context';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { getValue } from '../../../utils/common';
-import { signOut } from 'next-auth/react';
+import { getSession, signOut } from 'next-auth/react';
 import { authConstant } from '../../../client/context/constant';
 import SearchAppBar from "./SearchAppBar"
-import React from 'react';
 import { Divider } from '@mui/material';
+import { getUserData } from '../../../client/request';
 
 
 function AsideBarM({
@@ -29,17 +31,32 @@ function AsideBarM({
     handleCloseUserMenu,
     settings
 }) {
-
+    // store state,search state,user image state,get user value const,get authenticated state 
     const [state, dispatch] = useStore();
     const [search, setSearch] = React.useState(false);
+    const [userImage, setUserImage] = React.useState(false);
     const user = getValue(state, ["user"], null)
     const authenticated = getValue(state, ["user", "authenticated"], false);
-
+    useEffect(() => {
+        const get = async () => {
+            const session = await  getSession()
+            if (session?.user) {
+                const{id}=session?.user
+                const result = await getUserData(id)
+                if (!result?.hasError) {
+                    setUserImage(result?.body.avatarImage)
+                } else if (result?.hasError) {
+                    setUserImage("")
+                }
+            }
+        }
+        get()
+    }, [])
     return (
         <Box sx={{ flexGrow: 0 }}>
             {search && <SearchAppBar />}
             <IconButton sx={{ mr: 1, color: 'white', }} onClick={() => setSearch(!search)}>
-                <SearchIcon sx={{ width: 20, height: 20 }}  />
+                <SearchIcon sx={{ width: 20, height: 20 }} />
             </IconButton>
             {
                 themeMode == "dark" ? <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => setThemeMode("light")}> <LightModeIcon /> </IconButton> : <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => setThemeMode("dark")}><NightlightIcon /></IconButton>
@@ -53,7 +70,7 @@ function AsideBarM({
                     <Link href="/profile/CreateNews"><Button sx={{ color: "white" }}> Create</Button></Link>
                     <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 1 }}>
-                            <Avatar alt={user.name} src="/static/images/avatar/2.jpg" />
+                            <Avatar alt={user.name} src={userImage == "" ? "" : userImage} />
                         </IconButton>
                     </Tooltip>
                 </> :

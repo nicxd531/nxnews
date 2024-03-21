@@ -11,9 +11,12 @@ import HeadingsTemplate from "../../../components/profile/HeadingsTemplate";
 import ConclusionInput from "../../../components/profile/ConclusionInput";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import AlertError from "../../../components/reuseable/AlertError";
+import AlertSuccess from "../../../components/reuseable/AlertSuccess";
 
 function CreateNews() {
-  // create newws component
+  // create newws component for creating new post main component
   const router = useRouter();
   // haedings  (P=paragraph,H=haeding,C= conclusion)
   const [mainH, setMainH] = React.useState("");
@@ -68,7 +71,6 @@ function CreateNews() {
       if (result.errorMessage.error.code) {
         setError("failed to connect to server . try again");
       } else {
-        console.log(result.errorMessage.error,"nicx")
         if (result.errorMessage.error == "mainHeading required") {
           setError(" Main heading required");
         } else if (result.errorMessage.error == "categories required") {
@@ -79,7 +81,7 @@ function CreateNews() {
         setPosting(result);
       }
     } else {
-      setError("post sucessful")
+      setError("post sucessful");
       router.replace("/");
     }
     setPosting(false);
@@ -93,30 +95,20 @@ function CreateNews() {
       >
         CREATE POST
         {error && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <Alert
-              severity={error == "post sucessful" ? "success" : "error"}
-              sx={{
-                width: "80%",
-                fontSize: {
-                  xs: "12px",
-                  lg: "16px",
-                  textTransform: "capitalize",
-                },
-                mt: 1,
-              }}
-            >
-              {" "}
-              {error}
-            </Alert>
-          </Box>
+          <AnimatePresence>
+            {error && (
+              <motion.div
+                exit={{ scale: 0.0 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+              >
+                {error == "Log in sucessful" ? (
+                  <AlertSuccess message={error} />
+                ) : (
+                  <AlertError message={error} />
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         )}
       </Typography>
       <form

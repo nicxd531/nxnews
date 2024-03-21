@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
+    avatarImage:{
+        type:String,
+    },
     userName:{
         type:String,
     },
@@ -32,25 +35,22 @@ const UserSchema = new mongoose.Schema({
     location:{
         type:String,
     },
-    email:{
+    linkName:{
         type:String,
     },
-    LinkName:{
-        type:String,
-    },
-    LinkUrl:{
+    linkUrl:{
         type:String,
     },
     twitterUsername:{
         type:String,
     },
-    twitterUrl:{
+    twitterLink:{
         type:String,
     },
-    instagramUsername:{
+    instaUsername:{
         type:String,
     },
-    instagramUrl:{
+    instaLink:{
         type:String,
     }
 },{

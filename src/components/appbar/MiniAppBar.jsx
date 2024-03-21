@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,17 +22,23 @@ import { useStore } from '../../../client/context';
 import { getValue } from '../../../utils/common';
 import { signOut } from 'next-auth/react';
 import { authConstant } from '../../../client/context/constant';
+import { getUserData } from '../../../client/request';
 
 
 export default function MiniAppBar() {
+    // mini app bar component
+    // context state ,themMode state,user value from context,auntenticated state,invoked dispatch states 
     const [state, dispatch] = useStore();
     const themeMode = useSelector((state) => state.theme.value);
     const user = getValue(state, ["user"], null)
     const authenticated = getValue(state, ["user", "authenticated"], false);
     const dispact = useDispatch()
+    // auth state,user image state ,anchor state ,open state 
     const [auth, setAuth] = React.useState(false);
+    const [userImage, setUserImage] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
+    // handle Theme change function ,toggleDrawer,handleMenu,handleClose,handleSignOut functions
     const handeleThemeChange = (e) => {
         dispact(ChangeThemeMode(e))
     }
@@ -56,6 +62,19 @@ export default function MiniAppBar() {
             })
         })
     }
+    useEffect(()=>{
+        const get =async ()=>{
+            if(user){
+                const result = await getUserData(user?.id)
+               if(!result?.hasError){
+                setUserImage(result?.body.avatarImage)
+               }else if(result?.hasError){
+                setUserImage("")
+               }
+            }
+        }
+        get()
+    },[])
     return (
         <Box sx={{ flexGrow: 1, display: { lg: "none" } }}>
             <AppBar position="static" sx={{ backgroundColor: "snow" }}>
@@ -86,7 +105,7 @@ export default function MiniAppBar() {
                                 color="inherit"
                             >
                                 <Typography sx={{ textTransform: "capitalize" }}>{user.name}</Typography>
-                                <Avatar alt={user.name} sx={{ width: 24, height: 24, ml: 1 }} />
+                                <Avatar alt={user.name} src={userImage==""?"":userImage} sx={{ width: 24, height: 24, ml: 1 }} />
                             </IconButton>
                             <Menu
                                 id="menu-appbar"

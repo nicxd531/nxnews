@@ -20,7 +20,7 @@ function HomeSection4a({ data }) {
                         <SwiperSlide key={index} style={{ position: "relative" }}>
                             <img src={data.mainImage} alt='post image' />
                             <Box sx={{ color:"white",position: "absolute",top:0,width:"100%",display:"flex",alignItems:"center",justifyContent:"center",height:"100%",flexDirection:"column"}}>
-                                <Typography  sx={{ display: "flex", alignItems: "center", fontSize: { xs: "0.8rem", lg: "1.2rem" }, mb: { xs: 1, lg: 3 } }}><Box sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "grey", borderRadius: "50%", marginRight: "6px" }}></Box> {data.categories} Topic</Typography>
+                                <Typography  sx={{ display: "flex", alignItems: "center", fontSize: { xs: "0.8rem", lg: "1.2rem" }, mb: { xs: 1, lg: 3 } }}><Box component="span" sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "grey", borderRadius: "50%", marginRight: "6px" }}></Box> {data.categories} Topic</Typography>
                                 <Typography variant="h4" sx={{width:"30%",mb:2}}>{data.mainHeading}</Typography>
                                 <Button variant="outlined" sx={{color:"white",borderColor:"white",fontSize:"1rem",textTransform:"capitalize"}}> Read More</Button>
                             </Box>

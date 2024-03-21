@@ -8,16 +8,22 @@ import { useRouter } from "next/navigation";
 import BasicPostTemplate from "../../components/Skelentons/BasicPostTemplate";
 import UsersPosts from "../../components/profile/UsersPosts";
 import NoPost from "../../components/reuseable/NoPost";
+import { AnimatePresence, motion } from "framer-motion";
+import AlertError from "../../components/reuseable/AlertError";
+import AlertSuccess from "../../components/reuseable/AlertSuccess";
 
 const ProfileArticles = () => {
+  // users post component for getting user specific posts
+  // states for revalidte the posts are correct,post fetch ,session getting , error handling
+  // loading
   const [revalidate, setRevalidate] = React.useState(1);
   const [post, setPost] = React.useState(null);
   const [session, setSession] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [noPost, setNoPost] = React.useState(false);
   const route = useRouter();
-  
-
+  // use effect hook for getting user specific posts
   useEffect(() => {
     const fetchId = async () => {
       try {
@@ -29,20 +35,22 @@ const ProfileArticles = () => {
         }
         const userId = await session.user.id;
         const post = await getUserPost({ userId });
-        console.log(post, "post");
         if (post == null) {
           setError("Failed to fetch, Check connection");
           setLoading(false);
         } else if (post) {
           if (!post.hasError) {
-            console.log(post, "nextpost");
+            if (post == []) {
+              setPost(true);
+              setLoading(false);
+            }
             setPost(post.body.posts);
             setSession(session);
           } else if (post.hasError) {
+            console.log(post);
             setError("failed to load, Check connection");
           }
         }
-
         setLoading(false);
       } catch (error) {
         setError(errorhandler(error));
@@ -50,7 +58,7 @@ const ProfileArticles = () => {
     };
     fetchId();
   }, [revalidate]);
- 
+
   const mapData = !error && (
     <Box
       sx={{
@@ -60,14 +68,25 @@ const ProfileArticles = () => {
         p: 2,
       }}
     >
-      { post  ?
+      {!noPost ? (
+        post &&
         post.map((post, index) => {
-          return <UsersPosts key={index} data={post} setRevalidate={setRevalidate} revalidate={revalidate}/>;
-        }):<NoPost/>}
+          return (
+            <UsersPosts
+              key={index}
+              data={post}
+              setRevalidate={setRevalidate}
+              revalidate={revalidate}
+            />
+          );
+        })
+      ) : (
+        <NoPost />
+      )}
     </Box>
   );
   return (
-    <Box sx={{ minHeight: "100vh",overflow:"hidden"}}>
+    <Box sx={{ minHeight: "100vh", overflow: "hidden" }}>
       <Typography
         variant="h3"
         sx={{
@@ -78,31 +97,25 @@ const ProfileArticles = () => {
           textTransform: "capitalize",
         }}
       >
-        {" "}
-        Welcome to Posts {session ? session.user.name : "user"}{" "}
+        Welcome to Posts {session ? session.user.name : "user"}
       </Typography>
       {error && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%"
-          }}
-        >
-          <Alert
-            severity={error == "Log in sucessful" ? "success" : "error"}
-            sx={{
-              width: "80%",
-              fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" },
-              mt: 1,
-            }}
-          >
-            {error}
-          </Alert>
-        </Box>
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              exit={{ scale: 0.0 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+            >
+              {error == "Log in sucessful" ? (
+                <AlertSuccess message={error} />
+              ) : (
+                <AlertError message={error} />
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
-      {loading ? <BasicPostTemplate /> :mapData}
+      {loading ? <BasicPostTemplate /> : mapData}
     </Box>
   );
 };

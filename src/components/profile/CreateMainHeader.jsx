@@ -4,9 +4,10 @@ import { Box, TextField, Typography } from '@mui/material'
 import { UploadButton } from '../../../utils/uploadthing';
 import Select from "./Select"
 
-function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage,categories,setCategories }) {
-  // main Header component
-  const [err,setErr]=React.useState("")
+function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage, categories, setCategories }) {
+  // main Header component for create new post page
+  // use state for error 
+  const [err, setErr] = React.useState("")
   return (
     <Box>
       <TextField
@@ -16,7 +17,7 @@ function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage,categories,
         onChange={(e) => setMainH(e.target.value)}
 
       />
-       <Select setCategories={setCategories} categories={categories}/>
+      <Select setCategories={setCategories} categories={categories} />
       <Box
         sx={{
           width: "100%",
@@ -30,13 +31,13 @@ function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage,categories,
           overflow: "hidden"
         }}
       >
-        {mainImage ? <img alt='paragrap image' src={`${mainImage}`} style={{widht:"100%",height:"100%"}} /> : <Typography> press the upload button to upload Main Image</Typography>}
+        {mainImage ? <img alt='paragrap image' src={`${mainImage}`} style={{ widht: "100%", height: "100%" }} /> : <Typography> press the upload button to upload Main Image</Typography>}
       </Box>
-      <Box sx={{mt:2}}>
-        {err && <Typography className='text-danger' sx={{textAlign:"center",width:"100%"}}>{err}</Typography>}
-        <UploadButton 
-        className="custom-class" 
-        endpoint='imageUploader'
+      <Box sx={{ mt: 2 }}>
+        {err && <Typography className='text-danger' sx={{ textAlign: "center", width: "100%" }}>{err}</Typography>}
+        <UploadButton
+          className="custom-class"
+          endpoint='imageUploader'
           onClientUploadComplete={(res) => {
             setErr(false)
             console.log("Files: ", res);
@@ -48,7 +49,7 @@ function CreateMainHeader({ setMainH, mainH, setMainImage, mainImage,categories,
           }}
         />
       </Box>
-      
+
     </Box>
   )
 }

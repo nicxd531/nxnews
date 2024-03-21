@@ -17,7 +17,7 @@ function HomeSection1({ post }) {
                     <img src={hotTopic[0]?.mainImage} alt='post image' style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </Box>
                 <Box sx={{ height: "100%", width: { xs: "49%", lg: "59%" } }}>
-                    <Typography variant='h5' sx={{ display: "flex", alignItems: "center", fontSize: { xs: "1rem", lg: "1.7rem" }, mb: { xs: 1, lg: 3 } }}><Box sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "black", borderRadius: "50%", marginRight: "6px" }}></Box> Hot Topic</Typography>
+                    <Typography variant='h5' sx={{ display: "flex", alignItems: "center", fontSize: { xs: "1rem", lg: "1.7rem" }, mb: { xs: 1, lg: 3 } }}><Box component="span" sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "black", borderRadius: "50%", marginRight: "6px" }}></Box> Hot Topic</Typography>
                     <Typography variant="h4" sx={{ fontSize: { xs: "1.5rem", lg: "3.5rem" }, fontWeight: "bold", mb: { xs: 2, lg: 4 } }}>{hotTopic[0]?.mainHeading}</Typography>
                     <Typography variant="h6" sx={{ fontSize: { xs: "0.8rem", lg: "2rem" }, textTransform: "capitalize", mb: { lg: 4 } }}>{hotTopic[0]?.user?.location}, {hotTopic[0]?.createdAt}</Typography>
                     <Button sx={{ textTransform: "capitalize", color: "black", fontSize: { xs: "0.7rem", lg: "1rem" } }}>Read more <ArrowRight /></Button>

@@ -4,7 +4,7 @@ import { ButtonGroup, Button } from 'react-bootstrap'
 
 
 function Select({ setCategories, categories }) {
-    // select component
+    // select component for create new post and the availbale categories array 
     const categoriesArray = ['Sport', 'Health', 'Political', 'Business', 'Finance', "Life", "Entertain"];
     return (
         <Box sx={{width:"110%",overflow:"hidden",ml:{xs:-1,lg:0}}}>
