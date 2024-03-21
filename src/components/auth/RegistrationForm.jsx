@@ -8,7 +8,9 @@ import Alert from '@mui/material/Alert';
 import { getValue } from '../../../utils/common';
 import { useRouter } from 'next/navigation';
 import { useStore } from '../../../client/context';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import AlertError from '../reuseable/AlertError';
+import AlertSuccess from '../reuseable/AlertSuccess';
 
 
 function RegistrationForm() {
@@ -85,9 +87,9 @@ function RegistrationForm() {
 
     return (
         <motion.div
-            initial={{ scale: 0.5 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+        initial={{ scale: 0.5 }}
+        animate={{ scale: 1 }}
+        transition={{delay:0.2,type:"spring",stiffness:120}}
         >
             <Box sx={{ maxWidth: { xs: "350px", lg: "400px" }, border: "1px solid black", mt: { xs: 3, lg: 6 }, mx: "auto", pr: 2 }}>
                 <Typography
@@ -109,9 +111,20 @@ function RegistrationForm() {
                         Nxnews
                     </Link>
                 </Typography>
-                {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                    <Alert severity={errorMessage == "signup sucessful" ? "success" : "error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
-                </Box>}
+                <AnimatePresence>
+                    {errorMessage && (
+                        <motion.div
+                            exit={{ scale: 0.0 }}
+                            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+                        >
+                            {errorMessage == "signup sucessful" ? (
+                                <AlertSuccess message={errorMessage} />
+                            ) : (
+                                <AlertError message={errorMessage} />
+                            )}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
                 <SigninEmail
                     setPassword={setPassword}
                     handleClickShowPassword={handleClickShowPassword}

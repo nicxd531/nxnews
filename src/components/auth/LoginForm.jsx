@@ -9,7 +9,9 @@ import { useRouter } from 'next/navigation';
 import { authConstant } from '../../../client/context/constant';
 import { useStore } from '../../../client/context';
 import { getValue } from '../../../utils/common';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import AlertError from '../reuseable/AlertError';
+import AlertSuccess from '../reuseable/AlertSuccess';
 
 
 function LoginForm() {
@@ -64,16 +66,15 @@ function LoginForm() {
     }
     return (
         <Box
-
             sx={{ width: { xs: "100%", lg: "40%" } }}>
             <motion.div
                 component="div"
                 initial={{ x: 500 }}
                 animate={{ x: -20 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
-                style={{width:"100%"}}
+                style={{ width: "100%" }}
             >
-                <Box sx={{ maxWidth: { xs: "350px", lg: "350px" }, border: "1px solid black", mt: { xs: 3, lg: 17 }, mx: "auto", pr: 2 }}>
+                <Box sx={{ maxWidth: { xs: "350px", lg: "350px" }, border: "1px solid black", mt: { xs: 8, lg: 17 }, mx: "auto", pr: 2, mr: { xs: "12px", lg: "auto" } }}>
                     <Typography
                         variant="h4"
                         noWrap
@@ -93,9 +94,20 @@ function LoginForm() {
                             Nxnews
                         </Link>
                     </Typography>
-                    {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                        <Alert severity={errorMessage == "Log in sucessful" ? "success" : "error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
-                    </Box>}
+                    <AnimatePresence>
+                        {errorMessage && (
+                            <motion.div
+                                exit={{ scale: 0.0 }}
+                                transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+                            >
+                                {errorMessage == "Log in sucessful" ? (
+                                    <AlertSuccess message={errorMessage} />
+                                ) : (
+                                    <AlertError message={errorMessage} />
+                                )}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                     <LoginEmail
                         handleClickShowPassword={handleClickShowPassword}
                         handleMouseDownPassword={handleMouseDownPassword}

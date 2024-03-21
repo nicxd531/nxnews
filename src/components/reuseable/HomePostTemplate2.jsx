@@ -29,7 +29,7 @@ function HomePostTemplate2({ data }) {
         bgColor = "#814de5"
     }
     return (
-        <Box sx={{ height: "350px",width:{xs:"100%",lg:"32%"},mt:{xs:2,lg:4 }}}>
+        <Box sx={{ height: "350px", width: { xs: "100%", lg: "350px" }, mt: { xs: 2, lg: 4 } }}>
             <Box sx={{ height: "50%", width: { xs: "100%", lg: "100%" }, objectFit: "cover", position: "relative", mb: 2 }}>
                 <img src={data?.mainImage} alt='post image' style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <Box sx={{ height: "25px", backgroundColor: bgColor, position: "absolute", top: 0, right: 0, mr: 1, mt: 1, p: 1, color: "whitesmoke", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", px: 2 }}><Typography sx={{ textTransform: "capitalize", fontSize: { xs: "1rem", lg: "1rem" } }}> {data.categories}</Typography></Box>
@@ -38,7 +38,7 @@ function HomePostTemplate2({ data }) {
             <Box sx={{ height: "100%", width: { xs: "100%", lg: "100%" } }}>
                 <Typography variant="h4" sx={{ fontSize: { xs: "0.8rem", lg: "2rem" }, fontWeight: "bold", mb: { lg: 2 } }}>{data?.mainHeading}</Typography>
                 <Typography className="text-muted" sx={{ fontSize: { xs: "0.8rem", lg: "1rem" }, width: "100%", mb: 2 }}>{truncatedText}</Typography>
-                <Button variant='contained' sx={{ textTransform: "capitalize", color: "white", fontSize: { xs: "0.7rem", lg: "1rem" }, bgcolor: "black" }}>Read more  <ArrowOutwardIcon sx={{ml:1}}/></Button>
+                <Button variant='contained' sx={{ textTransform: "capitalize", color: "white", fontSize: { xs: "0.7rem", lg: "1rem" }, bgcolor: "black" }}>Read more  <ArrowOutwardIcon sx={{ ml: 1 }} /></Button>
             </Box>
         </Box>
     )
