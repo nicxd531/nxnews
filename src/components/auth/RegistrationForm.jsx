@@ -8,6 +8,7 @@ import Alert from '@mui/material/Alert';
 import { getValue } from '../../../utils/common';
 import { useRouter } from 'next/navigation';
 import { useStore } from '../../../client/context';
+import { motion } from 'framer-motion';
 
 
 function RegistrationForm() {
@@ -83,52 +84,58 @@ function RegistrationForm() {
     }
 
     return (
-        <Box sx={{ maxWidth: { xs: "350px", lg: "400px" }, border: "1px solid black", mt: { xs: 3, lg: 6 }, mx: "auto", pr: 2 }}>
-            <Typography
-                variant="h4"
-                noWrap
-                component="h4"
-                sx={{
-                    fontFamily: 'monospace',
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    flexGrow: 1, mx: "auto",
-                    textAlign: "center",
-                    mt: 4
-                }}
-            >
-                <Link href="/">
-                    Nxnews
-                </Link>
-            </Typography>
-            {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                <Alert severity={errorMessage == "signup sucessful" ? "success" : "error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
-            </Box>}
-            <SigninEmail
-                setPassword={setPassword}
-                handleClickShowPassword={handleClickShowPassword}
-                handleMouseDownPassword={handleMouseDownPassword}
-                setComfirmPassword={setComfirmPassword}
-                handleClickShowPassword2={handleClickShowPassword2}
-                showPassword={showPassword}
-                showPassword2={showPassword2}
-                setEmail={setEmail}
-                alert={alert}
-                handleSubmit={handleSubmit}
-                setName={setName}
-                loading={loading}
-                name={name}
-                email={email}
-                password={password}
-                confirmPassword={confirmPassword}
-            />
-            <Box sx={{ display: "flex", mb: 6, justifyContent: 'center', alignItems: "center" }}>
-                <Typography>Do you already have an account ?</Typography>
-                <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/login">Login Now</Link></Button>
+        <motion.div
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+        >
+            <Box sx={{ maxWidth: { xs: "350px", lg: "400px" }, border: "1px solid black", mt: { xs: 3, lg: 6 }, mx: "auto", pr: 2 }}>
+                <Typography
+                    variant="h4"
+                    noWrap
+                    component="h4"
+                    sx={{
+                        fontFamily: 'monospace',
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'inherit',
+                        textDecoration: 'none',
+                        flexGrow: 1, mx: "auto",
+                        textAlign: "center",
+                        mt: 4
+                    }}
+                >
+                    <Link href="/">
+                        Nxnews
+                    </Link>
+                </Typography>
+                {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                    <Alert severity={errorMessage == "signup sucessful" ? "success" : "error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
+                </Box>}
+                <SigninEmail
+                    setPassword={setPassword}
+                    handleClickShowPassword={handleClickShowPassword}
+                    handleMouseDownPassword={handleMouseDownPassword}
+                    setComfirmPassword={setComfirmPassword}
+                    handleClickShowPassword2={handleClickShowPassword2}
+                    showPassword={showPassword}
+                    showPassword2={showPassword2}
+                    setEmail={setEmail}
+                    alert={alert}
+                    handleSubmit={handleSubmit}
+                    setName={setName}
+                    loading={loading}
+                    name={name}
+                    email={email}
+                    password={password}
+                    confirmPassword={confirmPassword}
+                />
+                <Box sx={{ display: "flex", mb: 6, justifyContent: 'center', alignItems: "center" }}>
+                    <Typography>Do you already have an account ?</Typography>
+                    <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/login">Login Now</Link></Button>
+                </Box>
             </Box>
-        </Box>
+        </motion.div>
     )
 }
 
