@@ -6,9 +6,10 @@ import { KeyboardArrowRight, KeyboardArrowLeft } from '@mui/icons-material'
 
 
 function SubscribeMini({ prices, setPrices }) {
-    // use state hook for the image slider
+    // component for small screens
+    // use state hook for the price card slider slider
     const [currentSlide, setcurrentSlide] = React.useState(0)
-
+    // scroll functions and states 
     const autoScroll = true;
     let slideInterval;
     let intervalTime = 5000;
@@ -18,7 +19,6 @@ function SubscribeMini({ prices, setPrices }) {
     const prevSlide = () => {
         setcurrentSlide(currentSlide === 0 ? 2 : currentSlide - 1)
     }
-
     function auto() {
         slideInterval = setInterval(nextSlide, intervalTime)
     }

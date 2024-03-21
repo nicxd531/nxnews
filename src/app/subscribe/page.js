@@ -4,6 +4,7 @@ import SubscribeMain from "../../components/subscribe/subscribeMain";
 import HotTopics from "../../components/reuseable/HotTopics";
 
 export default function page() {
+  // main subscribe page 
   const para =
     "Montes est quam felis cursus parturient volutpat, vitae pulvinar a donec nam massa pretium, justo velit maecenas sem magna. Molestie vulputate porttitor maecenas netus semper accumsan dapibus tempor sociis, fringilla curae torquent suscipit velit ante pretium odio est nisi, augue vehicula ultrices natoque taciti potenti rhoncus conubia. Ad taciti quam porta montes felis sodales tempor eleifend porttitor fusce suscipit posuere orci cum potenti auctor erat, at pharetra etiam tellus bibendum morbi ullamcorper pulvinar per urna risus purus nullam mus aliquam.";
   return (
