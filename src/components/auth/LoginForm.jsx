@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { authConstant } from '../../../client/context/constant';
 import { useStore } from '../../../client/context';
 import { getValue } from '../../../utils/common';
+import { motion } from 'framer-motion';
 
 
 function LoginForm() {
@@ -34,6 +35,7 @@ function LoginForm() {
         setLoading(true)
         const payload = { email, password }
         dispatch({ type: authConstant.LOGIN_REQUEST })
+        // try to sign in with credentials and also get session
         try {
             const result = await signIn("credentials", { ...payload, redirect: false });
             const session = await getSession()
@@ -61,45 +63,56 @@ function LoginForm() {
         setLoading(false)
     }
     return (
-        <Box sx={{ width: { xs: "100%", lg: "40%" } }}>
-            <Box sx={{ maxWidth: { xs: "350px", lg: "400px" }, border: "1px solid black", mt: { xs: 3, lg: 6 }, mx: "auto", pr: 2 }}>
-                <Typography
-                    variant="h4"
-                    noWrap
-                    component="h4"
-                    sx={{
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                        flexGrow: 1, mx: "auto",
-                        textAlign: "center",
-                        mt: 4
-                    }}
-                >
-                    <Link href="/">
-                        Nxnews
-                    </Link>
-                </Typography>
-                {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                    <Alert severity={errorMessage == "Log in sucessful" ? "success" : "error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
-                </Box>}
-                <LoginEmail
-                    handleClickShowPassword={handleClickShowPassword}
-                    handleMouseDownPassword={handleMouseDownPassword}
-                    showPassword={showPassword}
-                    setPassword={setPassword}
-                    setEmail={setEmail}
-                    loading={loading}
-                    LoginHandler={LoginHandler}
-                />
-                <Box sx={{ display: "flex", mb: 6, justifyContent: 'center', alignItems: "center" }}>
-                    <Typography>Dont have an account ?</Typography>
-                    <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/register">Register here</Link></Button>
+        <Box
+
+            sx={{ width: { xs: "100%", lg: "40%" } }}>
+            <motion.div
+                component="div"
+                initial={{ x: 500 }}
+                animate={{ x: -20 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+                style={{width:"100%"}}
+            >
+                <Box sx={{ maxWidth: { xs: "350px", lg: "350px" }, border: "1px solid black", mt: { xs: 3, lg: 17 }, mx: "auto", pr: 2 }}>
+                    <Typography
+                        variant="h4"
+                        noWrap
+                        component="h4"
+                        sx={{
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            flexGrow: 1, mx: "auto",
+                            textAlign: "center",
+                            mt: 4
+                        }}
+                    >
+                        <Link href="/">
+                            Nxnews
+                        </Link>
+                    </Typography>
+                    {errorMessage && <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                        <Alert severity={errorMessage == "Log in sucessful" ? "success" : "error"} sx={{ width: "80%", fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" }, mt: 1 }}> {errorMessage}</Alert>
+                    </Box>}
+                    <LoginEmail
+                        handleClickShowPassword={handleClickShowPassword}
+                        handleMouseDownPassword={handleMouseDownPassword}
+                        showPassword={showPassword}
+                        setPassword={setPassword}
+                        setEmail={setEmail}
+                        loading={loading}
+                        LoginHandler={LoginHandler}
+                    />
+                    <Box sx={{ display: "flex", mb: 6, justifyContent: 'center', alignItems: "center" }}>
+                        <Typography>Dont have an account ?</Typography>
+                        <Button sx={{ p: 0, textTransform: "capitalize", ml: 1 }}><Link href="/register">Register here</Link></Button>
+                    </Box>
                 </Box>
-            </Box>
+            </motion.div>
         </Box>
+
     )
 }
 
