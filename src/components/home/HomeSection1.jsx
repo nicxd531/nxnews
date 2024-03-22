@@ -1,7 +1,7 @@
 import { ArrowRight } from '@mui/icons-material'
 import { Box, Button, Typography } from '@mui/material'
-import Image from 'next/image'
 import React from 'react'
+import EastIcon from '@mui/icons-material/East';
 
 
 function HomeSection1({ post }) {
@@ -20,10 +20,10 @@ function HomeSection1({ post }) {
                     <Typography variant='h5' sx={{ display: "flex", alignItems: "center", fontSize: { xs: "1rem", lg: "1.7rem" }, mb: { xs: 1, lg: 3 } }}><Box component="span" sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "black", borderRadius: "50%", marginRight: "6px" }}></Box> Hot Topic</Typography>
                     <Typography variant="h4" sx={{ fontSize: { xs: "1.5rem", lg: "3.5rem" }, fontWeight: "bold", mb: { xs: 2, lg: 4 } }}>{hotTopic[0]?.mainHeading}</Typography>
                     <Typography variant="h6" sx={{ fontSize: { xs: "0.8rem", lg: "2rem" }, textTransform: "capitalize", mb: { lg: 4 } }}>{hotTopic[0]?.user?.location}, {hotTopic[0]?.createdAt}</Typography>
-                    <Button sx={{ textTransform: "capitalize", color: "black", fontSize: { xs: "0.7rem", lg: "1rem" } }}>Read more <ArrowRight /></Button>
+                    <Button sx={{ textTransform: "capitalize", color: "black", fontSize: { xs: "0.7rem", lg: "1rem" } }}>Read more <EastIcon sx={{ml:1,width:{xs:"15px",lg:"25px"},height:{xs:"15px",lg:"25px"}}} /></Button>
                 </Box>
             </Box>
-            <Box sx={{display:"flex",justifyContent:"space-between",flexWrap:"wrap"}}>
+            <Box sx={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",mt:{xs:1,lg:3}}}>
                 {others?.map((data,index) => {
                     return (
                         <Box key={index} sx={{width:{xs:"100%",lg:"33%"},height:{xs:"70px",lg:"100px"},mb:1,display:"flex"}}>

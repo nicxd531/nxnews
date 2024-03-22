@@ -13,14 +13,14 @@ function SearchBar() {
     const categories = ["Sport", "Health", "Political", "Business", "Finance", "Life", "Entertainment"]
     const [filter, setFilter] = React.useState(false)
     return (
-        <Box sx={{ mt: { xs: 3, lg: 6 } }}>
+        <Box sx={{ mt: { xs: 3, lg: 6 } ,zIndex:"0"}}>
             <Box sx={{ width: "100%", textAlign: "center" }}>
                 <Typography variant="h3" sx={{ textTransform: "capitalize", fontWeight: "bold", width: "40%", mx: "auto" }}>read the latest news from around the world</Typography>
             </Box>
             <Box sx={{ width: "100%", mt: { xs: 3, lg: 6 } }}>
                 <Paper
                     component="form"
-                    sx={{  display: 'flex', width: 400, mx: "auto", bgcolor: "grey" ,flexDirection:"column"}}
+                    sx={{  display: 'flex', width: 400, mx: "auto", bgcolor: "#fafafa" ,flexDirection:"column"}}
                 >
                     <Box sx={{display: 'flex', alignItems: 'center',p: 1}}>
                         <InputBase
@@ -40,7 +40,7 @@ function SearchBar() {
                     {filter && <Box sx={{ display: "flex", justifyContent: "space-between",width:"600px", mt: 2 ,mx:"auto"}}>
                         {categories?.map((data, index) => {
                             return (
-                                <Button key={index} variant='contained' sx={{ bgcolor: "grey" }}>
+                                <Button key={index} variant='contained' sx={{ bgcolor: "#fafafa" }}>
                                     {data}
                                 </Button>
                             )

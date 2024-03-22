@@ -54,7 +54,7 @@ function AsideBarM({
     }, [])
     return (
         <Box sx={{ flexGrow: 0 }}>
-            {search && <SearchAppBar />}
+            {search && <SearchAppBar  setSearch={setSearch} search={search}/>}
             <IconButton sx={{ mr: 1, color: 'white', }} onClick={() => setSearch(!search)}>
                 <SearchIcon sx={{ width: 20, height: 20 }} />
             </IconButton>
