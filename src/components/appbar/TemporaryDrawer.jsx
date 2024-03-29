@@ -19,10 +19,9 @@ import Link from 'next/link';
 
 
 export default function TemporaryDrawer({ toggleDrawer, open }) {
-
-
+  // small screens temporary drawer 
   const DrawerList = (
-    <Box sx={{ width: 250, top: 40 }} role="presentation" onClick={() => toggleDrawer(false)}>
+    <Box sx={{ width: 250, top: 80 }} role="presentation" onClick={() => toggleDrawer(false)}>
       <List >
 
         <Typography
@@ -36,15 +35,16 @@ export default function TemporaryDrawer({ toggleDrawer, open }) {
             color: 'grey',
             textDecoration: 'none',
             flexGrow: 1,
-            textAlign:"center",
-            py:2
+            textAlign: "center",
+            py: 2,
+            mt:7
           }}
         >
           <Link href="/">
             Nxnews
           </Link>
         </Typography>
-        <Divider variant='inset' sx={{ml:0}}/>
+        <Divider variant='inset' sx={{ ml: 0 }} />
         {['Sport', 'Health', 'Political', 'Business', 'Finance', "Life", "Entertainment"].map((text, index) => {
           let icon;
           if (text == "Sport") {
@@ -63,15 +63,17 @@ export default function TemporaryDrawer({ toggleDrawer, open }) {
             icon = <AttractionsIcon />
           }
           return (
+
             <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {icon}
-                </ListItemIcon>
-                <Link href="/">
-                 <ListItemText primary={text} />
-                </Link>
-              </ListItemButton>
+              <Link href={"/"+ text.toLocaleLowerCase()}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {icon}
+                  </ListItemIcon>
+
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </Link>
             </ListItem>
           )
         })}

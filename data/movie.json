@@ -1,0 +1,50 @@
+[
+    {
+        "image":"/images/Thor.jpg",
+        "title":"Thor: The Dark World",
+        "genres":"action adventure sci-fi",
+        "ratings":4.5
+    },
+    {
+        "image":"/images/captain america.jpg",
+        "title":"Captain America: The First Avenger ",
+        "genres":"action adventure sci-fi",
+        "ratings":3
+    },
+    {
+        "image":"/images/infinity wars.jpg",
+        "title":"Avengers: Infinity War",
+        "genres":"action adventure sci-fi",
+        "ratings":5
+    },
+    {
+        "image":"/images/black widow.jpg",
+        "title":"Black Widow",
+        "genres":"action adventure sci-fi",
+        "ratings":3
+    },
+    {
+        "image":"/images/doctor strange.jpeg",
+        "title":"Doctor Strange",
+        "genres":"action adventure sci-fi",
+        "ratings":4
+    },
+    {
+        "image":"/images/black panther.jpg",
+        "title":"Black Panther",
+        "genres":"action adventure sci-fi",
+        "ratings":5
+    },
+    {
+        "image":"/images/shang chi.jpg",
+        "title":"Shang-Chi and the Legend of the Ten Rings ",
+        "genres":"action adventure sci-fi",
+        "ratings":2.5
+    },
+    {
+        "image":"/images/captain marvel.jpg",
+        "title":"Captain Marvel",
+        "genres":"action adventure sci-fi",
+        "ratings":4
+    }
+]

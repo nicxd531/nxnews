@@ -4,8 +4,9 @@ import SearchBar from "../../components/reuseable/SearchBar"
 import FinanceMain from "../../components/finance/FinanceMain"
 import Aside from "../../components/reuseable/Aside"
 function page() {
+  // main finance component
   return (
-    <Box sx={{px:{xs:2,lg:6}}}>
+    <Box sx={{px:{xs:2,lg:4}}}>
         <Box>
             <SearchBar/>
         </Box>

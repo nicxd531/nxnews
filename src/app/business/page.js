@@ -4,8 +4,9 @@ import SearchBar from "../../components/reuseable/SearchBar"
 import BusinessMain from "../../components/business/BusinessMain"
 import Aside from "../../components/reuseable/Aside"
 function page() {
+  // main business page
   return (
-    <Box sx={{px:{xs:2,lg:6}}}>
+    <Box sx={{px:{xs:2,lg:4}}}>
         <Box>
             <SearchBar/>
         </Box>

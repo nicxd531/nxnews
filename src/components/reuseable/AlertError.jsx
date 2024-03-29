@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import React from 'react'
 
 function AlertError({ message }) {
+  // alert error component
   return (
     <Box
       sx={{

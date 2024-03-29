@@ -2,16 +2,19 @@ import { KeyboardArrowRight } from '@mui/icons-material'
 import { Box, Button, Typography } from '@mui/material'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import React from 'react'
+import Link from 'next/link';
 
 
 function HomePostTemplate({ data }) {
+    // home post template 3 and truncating text function for cuttind down paragraph
     function truncateText(text, maxLength) {
         return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
     }
-    // Usage example
+   // const for holding trncated text data and color
     const longText = data?.cP
-    const truncatedText = truncateText(longText, 100); // Truncate to 20 characters
+    const truncatedText = truncateText(longText, 100); // Truncate to 100 characters
     const colour = data.categories
+    // conditions for categories tags
     let bgColor
     if (colour == "Sport") {
         bgColor = "#ffde37"
@@ -36,9 +39,9 @@ function HomePostTemplate({ data }) {
                 <Typography variant="h6" sx={{ color: "whiteSmoke", fontSize: { xs: "0.5rem", lg: "1rem" }, textTransform: "capitalize", mb: { lg: 4 }, position: "absolute", bottom: 0, mb: 1, ml: 1, }}>{data?.user?.location}, {data?.createdAt}</Typography>
             </Box>
             <Box sx={{ height: "100%", width: { xs: "100%", lg: "100%" } }}>
-                <Typography variant="h4" sx={{ fontSize: { xs: "0.8rem", lg: "2rem" }, fontWeight: "bold", mb: { lg: 2 } }}>{data?.mainHeading}</Typography>
+                <Typography variant="h4" sx={{ fontSize: { xs: "1rem", lg: "1.5rem" }, fontWeight: "bold", mb: { lg: 2 } }}>{data?.mainHeading}</Typography>
                 <Typography className="text-muted" sx={{ fontSize: { xs: "0.8rem", lg: "1rem" }, width: "100%", mb: 2 }}>{truncatedText}</Typography>
-                <Button variant='contained' sx={{ textTransform: "capitalize", color: "white", fontSize: { xs: "0.7rem", lg: "1rem" }, bgcolor: "black" }}>Read more  <ArrowOutwardIcon sx={{ml:1}}/></Button>
+                <Button variant='contained' sx={{ textTransform: "capitalize", color: "white", fontSize: { xs: "0.7rem", lg: "1rem" }, bgcolor: "black" }}><Link href={`/post/${data?._id}/${data?.slug}`}> Read more  <ArrowOutwardIcon sx={{ml:1}}/></Link></Button>
             </Box>
         </Box>
     )

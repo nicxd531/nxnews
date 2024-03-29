@@ -6,6 +6,7 @@ import XIcon from '@mui/icons-material/X';
 import React from 'react'
 
 function Footer() {
+    //  main footer component
     const data = [
         {
             title: "World",
@@ -50,7 +51,7 @@ function Footer() {
                     >
                         Nxnews
                     </Typography>
-                    <Typography sx={{ width: { xs: "100%", lg: "70%" }, lineHeight: "30px" ,textAlign:{xs:"center",lg:"start"}}}>
+                    <Typography sx={{ width: { xs: "100%", lg: "70%" },fontSize:{xs:"0.8rem",lg:"1rem"}, lineHeight: "30px" ,textAlign:{xs:"center",lg:"start"}}}>
                         Semper varius ac tortor dapibus id aenean nulla dictumst laoreet, suspendisse quisque erat ad torquent sem imperdiet nisi, rhoncus facilisis convallis feugiat diam himenaeos nunc non.
                     </Typography>
                 </Box>
@@ -59,7 +60,7 @@ function Footer() {
                         <Box key={index} sx={{ display: "flex", textAlign: { xs: "center", lg: "Start" }, flexDirection: "column", flexGrow: 1 }}>
                             <Typography variant="h6" sx={{ fontWeight: "bold", ml: {xs:0,lg:1} }}>{data.title}</Typography>
                             <Box sx={{ display: "flex", textAlign: "center", flexDirection: { xs: "row", lg: "column" }, justifyContent: { xs: "center", lg: "Start" }, alignItems: "start" }}>
-                                {data.content.map((data, index) => <IconButton sx={{ color: "whitesmoke" }} key={index}><Typography >{data}</Typography></IconButton>)}
+                                {data.content.map((data, index) => <IconButton sx={{ color: "whitesmoke" }} key={index}><Typography sx={{fontSize:{xs:"0.8rem",lg:"1rem"}}}>{data}</Typography></IconButton>)}
                             </Box>
                         </Box>
                     )
@@ -67,7 +68,7 @@ function Footer() {
             </Box>
             <Divider variant='inset' sx={{ bgcolor: "whiteSmoke", ml: 0 }} />
             <Box sx={{ display: "flex", justifyContent: "space-between", mt: { xs: 2, lg: 4 } }}>
-                <Typography> Copyright Nxnews &copy; {new Date().getFullYear()} | All Rights Reserved</Typography>
+                <Typography sx={{fontSize:{xs:"0.8rem",lg:"1rem"}}}> Copyright Nxnews &copy; {new Date().getFullYear()} | All Rights Reserved</Typography>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                     <FacebookIcon sx={{ mx: 2, width: 20, height: 20 }} />
                     <InstagramIcon sx={{ mx: 2, width: 20, height: 20 }} />

@@ -27,7 +27,7 @@ export async function POST(req, ctx) {
         // validate main heading ,categories and cp ,connect to data base ,slugigy,add new post with body and new slug and save post
         validateAllOnce({ mainHeading, categories, cP });
         await dbConnect();
-        const slug = slugify(body.mainHeading, { remove: /[*+~.()'"!:@]/g });
+        const slug = slugify(body.mainHeading, { remove: /[*+~.()'/"!:@]/g });
         const post = new Post({
           ...body,
           slug: slug.toLowerCase(),

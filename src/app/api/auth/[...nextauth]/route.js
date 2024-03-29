@@ -1,9 +1,11 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "../../../../../models/User";
+
 import bcrypt from "bcryptjs";
 import { dbConnect } from "../../../../../lib/db-connect";
 import { validateAllOnce } from "../../../../../utils/common";
+import User from "../../../../../models/user";
+
 // next auth for sign in authentication
 const authOptions = {
   providers: [

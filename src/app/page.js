@@ -5,10 +5,11 @@ import post from "../../data/post.json";
 import HomeMiddle from "../components/home/HomeMiddle";
 
 export default function Home() {
+  // main home page
   return (
-    <Box>
-      <Box component="main">
-        <HomeMiddle post={post} />
+    <Box sx={{minHeight:"100vh",overflow:"hidden"}}>
+      <Box component="main" >
+        <HomeMiddle post2={post} />
       </Box>
     </Box>
   );

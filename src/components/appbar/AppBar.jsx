@@ -20,7 +20,9 @@ export const Store = configureStore({
 })
 
 function AppBar() {
+    // main app bar component 
     const [state, dispatch] = useStore();
+    // use effect for confirming authenticated
     React.useEffect(() => {
         const authenticated = getValue(state, ["user", "authenticated"], false);
         const check = async () => {
@@ -47,7 +49,7 @@ function AppBar() {
 
     return (
         <Provider store={Store}>
-            <Box sx={{ mt: 0 }}>
+            <Box sx={{ mt: 0 ,zIndex:1300,position:"fixed",width:"100%",top:0}}>
                 <MiniAppBar />
                 <MaxAppBar />
             </Box>

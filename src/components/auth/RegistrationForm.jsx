@@ -46,7 +46,7 @@ function RegistrationForm() {
             const payload = { name, email, password }
             const result = await signUp(payload);
             // error checking
-            if (result.hasError) {
+            if (result?.hasError) {
                 if (result.errorMessage.keyValue) {
                     const error = getValue(result, ["errorMessage", "keyValue", "email"])
                     const mainErr = `email ${error} has already being used`

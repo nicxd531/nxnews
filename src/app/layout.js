@@ -7,6 +7,7 @@ import Footer from "../components/appbar/Footer";
 import { StoreProvider } from "../../client/context";
 import "@uploadthing/react/styles.css";
 import { dbConnect } from "../../lib/db-connect";
+import { Box } from "@mui/material";
 
 export const metadata = {
   title: "Nxnews",
@@ -19,11 +20,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <ThemeRegistry>
-        <body suppressHydrationWarning={true}>
+        <body suppressHydrationWarning={true} style={{width:"100vw"}}>
           <ScopedCssBaseline>
             <StoreProvider>
               <AppBar />
-              {children}
+              <Box sx={{pt:{xs:5,lg:5}}}>
+                 {children}
+              </Box>
               <Footer />
             </StoreProvider>
           </ScopedCssBaseline>

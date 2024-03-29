@@ -1,15 +1,20 @@
 "use client"
 import React, { useRef, useEffect } from 'react'
 import { Box, IconButton, Typography } from '@mui/material'
-import post from "../../../data/post.json"
 import HomePostTemplate2 from "./HomePostTemplate2"
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
-
-
+import { getAllPost } from '../../../client/request'
+import { errorhandler } from '../../../utils/common'
 
 function LatestNews() {
+  // latest news component and state management for mananging functions
+  const [post, setPost] = React.useState(null);
+  const [error, setError] = React.useState(null);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [noPost, setNoPost] = React.useState(false);
+  const [loading, setLoading] = React.useState(true)
   const [showTopBtn, setShowTopBtn] = React.useState(false)
-  const filteredData = post.slice(0, 5)
+  const filteredData = post?.slice(0, 5)
   const containerRef = useRef(null);
   // scroll right function 
   const scrollRight = () => {
@@ -33,7 +38,32 @@ function LatestNews() {
       } else {
         setShowTopBtn(false)
       }
-    })
+    });
+    const fetchId = async () => {
+      try {
+        setError(false);
+        setLoading(true);
+        const post = await getAllPost()
+        if (post == null) {
+          setError("Failed to fetch, Check connection");
+          setLoading(false);
+        } else if (post) {
+          if (!post.hasError) {
+            if (post == []) {
+              setNoPost(true);
+              setLoading(false);
+            }
+            setPost(post.body.posts);
+          } else if (post.hasError) {
+            setError("failed to load, Check connection");
+          }
+        }
+        setLoading(false);
+      } catch (error) {
+        setError(errorhandler(error));
+      }
+    };
+    fetchId();
 
 
   }, [])

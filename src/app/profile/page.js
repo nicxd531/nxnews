@@ -47,7 +47,6 @@ const ProfileArticles = () => {
             setPost(post.body.posts);
             setSession(session);
           } else if (post.hasError) {
-            console.log(post);
             setError("failed to load, Check connection");
           }
         }

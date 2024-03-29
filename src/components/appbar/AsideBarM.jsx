@@ -63,7 +63,7 @@ function AsideBarM({
             }
 
             <Typography variant="h5" sx={{ display: "inline", color: 'white', }}>
-                <Divider sx={{ height: 10, display: "inline", width: 5, color: "white" }} orientation="vertical" />
+                <Divider sx={{ height: 10, display: "inline", width: "10px", bgcolor: "white" }} orientation="vertical" />
             </Typography>
             {authenticated ?
                 <>

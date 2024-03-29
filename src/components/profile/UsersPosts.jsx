@@ -15,7 +15,7 @@ function UsersPosts({ data, revalidate, setRevalidate }) {
     // constant for likes length, long text,truncated text
     const likes = data?.likes == [] ? 0 : data?.likes
     const longText = data.cP
-    const truncatedText = truncateText(longText, 100); // Truncate to 20 characters
+    const truncatedText = truncateText(longText, 100); // Truncate to 100 characters
     // conditional statement for picking categories diaplay colours 
     const colour = data.categories
     let bgColor

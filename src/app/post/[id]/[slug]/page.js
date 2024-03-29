@@ -1,78 +1,73 @@
 "use client";
-import { Alert, Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { getSinglePost } from "../../../../../client/request";
+import { getSinglePost, getUserData } from "../../../../../client/request";
 import { errorhandler } from "../../../../../utils/common";
+import SinglePost from "../../../../components/post/SinglePost";
+import ContentCreator from "../../../../components/post/ContentCreator";
+import HotTopics from "../../../../components/reuseable/HotTopics";
 
 function SingleBlog({ params }) {
-    console.log(params,"params cliemt")
+  // main single post component and state management for single post
   const [post, setPost] = React.useState(null);
   const [session, setSession] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
-  const route = useRouter();
-
-
+  const [userContent, setUserContent] = React.useState(true);
+  // use effect function for getting single post
   useEffect(() => {
     const fetchId = async () => {
       try {
         setError(false);
         setLoading(true);
         const session = await getSession();
-        if (!session) {
-          route.replace("/");
-        }
         const userId = await session.user.id;
-        const post = await getSinglePost(params.id);
-        console.log(post, "post");
-        if (post == null) {
+        const postM = await getSinglePost(params.id);
+        if (postM == null) {
           setError("Failed to fetch, Check connection");
           setLoading(false);
-        } else if (post) {
-          if (!post.hasError) {
-            console.log(post, "nextpost");
-            setPost(post.body.posts);
+        } else if (postM) {
+          if (!postM.hasError) {
+            if (postM?.body?.posts?.user?._id) {
+              const UserC = await getUserData(postM?.body?.posts?.user?._id);
+              setUserContent(UserC?.body);
+            }
+            setPost(postM?.body?.posts);
             setSession(session);
-          } else if (post.hasError) {
+          } else if (postM.hasError) {
             setError("failed to load, Check connection");
           }
         }
-
         setLoading(false);
       } catch (error) {
-        console.log(error)
         setError(errorhandler(error));
       }
     };
     fetchId();
-  }, []);
+  }, [params.id]);
+
   return (
-    <Box sx={{ height: "100vh" }}>
-      {/* {error && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <Alert
-            severity={error == "Log in sucessful" ? "success" : "error"}
-            sx={{
-              width: "80%",
-              fontSize: { xs: "12px", lg: "16px", textTransform: "capitalize" },
-              mt: 1,
-            }}
-          >
-            {error}
-          </Alert>
-        </Box>
-      )} */}
-      single post
-    </Box>
+    <Container
+      maxWidth="xxl"
+      className="no-padding"
+      sx={{ p: 0, minHeight: "100vh", mt: 6 }}
+    >
+      <SinglePost post={post} error={error} loading={loading} />
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          flexWrap: "wrap",
+          width: "100%",
+          px: { xs: 3, lg: 6 },
+        }}
+      >
+        <ContentCreator user={userContent} loading={loading} error={error} />
+        <HotTopics />
+      </Box>
+    </Container>
   );
 }
 

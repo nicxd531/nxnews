@@ -14,10 +14,11 @@ const pages = ['sport', 'health', 'political', 'business', 'finance', "life", "e
 const settings = ['Dashboard', 'Logout'];
 
 function MaxAppBar() {
+  // max app bar component and states to manage max app bar functions 
   const [themeMode, setThemeMode] = React.useState(true);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+// mini menu functions 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -34,7 +35,7 @@ function MaxAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ display: { xs: "none", lg: "inline" }, bgcolor: "snow" }}>
+    <AppBar position="static" sx={{ display: { xs: "none", lg: "inline" }, bgcolor: "snow" ,zIndex:1300}}>
       <Container maxWidth="xl" className="glass">
         <Toolbar
           disableGutters

@@ -7,6 +7,7 @@ import { getSession } from 'next-auth/react';
 import { getUserData } from '../../../client/request';
 import SocialCompfake from './SocialCompfake';
 import SocialCompReal from './SocialCompReal';
+import ErrorHandleComp from '../reuseable/ErrorHandleComp';
 
 
 function ProfilePanel() {
@@ -37,7 +38,7 @@ function ProfilePanel() {
                     }
                 } catch (err) {
                     setLoading(false)
-                    setError(true)
+                    setError("failed to load, check connection")
                 }
             }
         }
@@ -46,8 +47,8 @@ function ProfilePanel() {
     }, [])
     return (
         <>
-            <Box sx={{ width: "20%", display: { xs: "none", lg: "inline" }, p: 4 }}>
-                {loading ? <Box sx={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}> <Loading /></Box> : display}
+            <Box sx={{ width: "20%", display: { xs: "none", lg: "inline" }, p: 4,minHeight:"100vh" }}>
+                {error ?<ErrorHandleComp error={error}/> :loading ? <Box sx={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" ,minHeight:"100vh"}}> <Loading /></Box> : display}
                 <Divider variant='inset' sx={{ ml: 0, mt: 2, bgcolor: "gray" }} />
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <Link href="/profile" > <Button onClick={() => setActive("post")} variant={active == "post" ? "contained" : "outlined"} sx={{ p: 1, mt: 2, width: "100%" }}>Articles</Button></Link>

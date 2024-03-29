@@ -5,6 +5,7 @@ import AsideNav from "../appbar/AsideNav"
 import AsideNews from "./AsideNews"
 
 function Aside() {
+    // aside component
     return (
         <Box sx={{ width: "19%" ,display:{xs:"none",lg:"flex",flexDirection:"column"},height:"500px"}}>
             <AsideNav/>

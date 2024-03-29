@@ -3,6 +3,7 @@ import { Box, Skeleton,Typography,Button } from '@mui/material'
 
 
 export default function Hs2skelenton() {
+    // home loading skelenton 2
     const array = ["1", "2"]
     return (
        <Box sx={{mt:{xs:2,lg:4},px:{xs:2,lg:4}}}>

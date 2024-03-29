@@ -62,11 +62,39 @@ export const updateUserProfile = async ({ data, userId }) => {
   }
 };
 // getUserData function
-export const getUserData = async ( userId ) => {
+export const getUserData = async (userId) => {
   try {
-    const res = await axios.get(baseUrl + `/post/user/getuser/${userId}`);
+      const res = await axios.get(baseUrl + `/post/user/getuser/${userId}`);
     return res.data;
   } catch (error) {
     return errorhandler(error);
   }
 };
+// get user post function for handling post creation and sending request to the server
+export const getAllPost = async () => {
+  try {
+    const res = await axios.post(baseUrl + `/post`);
+    return res.data;
+  } catch (error) {
+    return errorhandler(error);
+  }
+};
+// follow content creators function for handling following of content creator
+export const follow = async (payload) => {
+  console.log(payload,"from request")
+  try {
+    const res = await axios.post(baseUrl + `/user/follow`, payload);
+    return res.data;
+  } catch (error) {
+    return errorhandler(error);
+  }
+}
+// follow content creators function for handling following of content creator
+export const like = async (payload) => {
+  try {
+    const res = await axios.post(baseUrl + `/post/like`, payload);
+    return res.data;
+  } catch (error) {
+    return errorhandler(error);
+  }
+}
