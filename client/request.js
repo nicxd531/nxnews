@@ -72,6 +72,7 @@ export const getUserData = async (userId) => {
 };
 // get user post function for handling post creation and sending request to the server
 export const getAllPost = async () => {
+  console.log("here")
   try {
     const res = await axios.post(baseUrl + `/post`);
     return res.data;
