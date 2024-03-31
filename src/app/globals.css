@@ -126,7 +126,7 @@ border: 1px solid rgba(255, 141, 24, 0.3);
 }
 
 .deleteIcon:hover{
-background: rgba(238, 15, 15, 0.801);
+color: rgba(238, 15, 15, 0.801);
 }
 .swiper {
   width: 100%;

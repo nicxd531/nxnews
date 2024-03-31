@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import movie from "../../../data/movie.json"
 import Movies from '../reuseable/Movies'
+import Image from 'next/image'
 
 function HomeSection3() {
   // home section 3 component
@@ -46,7 +47,7 @@ function HomeSection3() {
                      style={{height:"100%", display: currentSlide == index ? "block" : "none" , objectFit: "cover"}}
                     transition={{ delay: 0.6, type: "spring", stiffness: 120 }}
                   >
-                    <img style={{ height: "100%", width: "100%", objectFit: "cover" }} src={data?.image} />
+                    <img alt='movie image' style={{ height: "100%", width: "100%", objectFit: "cover" }} src={data?.image} />
                   </motion.div>
                 )
 

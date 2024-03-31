@@ -91,7 +91,7 @@ function HomeSection2({ post, noPost, error }) {
                                 const longText = data.cP
                                 const truncatedText = truncateText(longText, 100); // Truncate to 20 characters
                                 return (
-                                    <Box key={index} sx={{ width: { xs: "100%", lg: "100%" }, height: { xs: "120px", lg: "170px" }, mb: 1, display: "flex" }}>
+                                    <Box key={index} sx={{ width: { xs: "100%", lg: "100%" }, height: { xs: "200px", lg: "170px" }, mb: 1, display: "flex" }}>
                                         <Box sx={{ width: "40%", height: "100%", objectFit: "cover" }}>
                                             <img src={data?.mainImage} alt='post image' style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                         </Box>

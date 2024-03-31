@@ -2,9 +2,6 @@
 import { createContext,useContext, useReducer } from "react";
 import { authConstant } from "./constant";
 
-
-
-
 const Store =createContext();
 
 const reducer =(state,action)=>{

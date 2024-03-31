@@ -32,8 +32,8 @@ function HomePostTemplate({ data }) {
         bgColor = "#814de5"
     }
     return (
-        <Box sx={{ height: "350px",width:{xs:"100%",lg:"32%"} }}>
-            <Box sx={{ height: "60%", width: { xs: "100%", lg: "100%" }, objectFit: "cover", position: "relative", mb: 2 }}>
+        <Box sx={{ height: {xs:"420px",lg:"350px"},width:{xs:"100%",lg:"32%"} }}>
+            <Box sx={{ height: "50%", width: { xs: "100%", lg: "100%" }, objectFit: "cover", position: "relative", mb: 2 }}>
                 <img src={data?.mainImage} alt='post image' style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <Box sx={{ height: "25px", backgroundColor: bgColor, position: "absolute", top: 0, right: 0, mr: 1, mt: 1, p: 1, color: "whitesmoke", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", px: 2 }}><Typography sx={{ textTransform: "capitalize", fontSize: { xs: "1rem", lg: "1rem" } }}> {data.categories}</Typography></Box>
                 <Typography variant="h6" sx={{ color: "whiteSmoke", fontSize: { xs: "0.5rem", lg: "1rem" }, textTransform: "capitalize", mb: { lg: 4 }, position: "absolute", bottom: 0, mb: 1, ml: 1, }}>{data?.user?.location}, {data?.createdAt}</Typography>

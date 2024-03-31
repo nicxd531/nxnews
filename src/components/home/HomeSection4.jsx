@@ -43,7 +43,7 @@ function HomeSection4({ post, noPost, error }) {
     );
 
     return (
-        <Box sx={{mt:{xs:2,lg:0}, py: 3, mb: 2, height: { xs: "690px", lg: "500px" }, display: "flex", justifyContent: "space-around", backgroundColor: "black", flexDirection: { xs: "column", lg: "row" } }}>
+        <Box sx={{mt:{xs:2,lg:0}, py: 3, mb: 2, height: { xs: "720px", lg: "500px" }, display: "flex", justifyContent: "space-around", backgroundColor: "black", flexDirection: { xs: "column", lg: "row" } }}>
             {mapData}
         </Box>
     )

@@ -40,13 +40,13 @@ function HomeSection1({ post, noPost, error }) {
             {( Array.isArray(others) && others?.length > 0)  ? (
                 post &&
                 <>
-                    <Box sx={{ width: "100%", height: { xs: "120px", lg: "250px" }, display: "flex", justifyContent: "space-between", mb: 2 }}>
+                    <Box sx={{ width: "100%", height: { xs: "200px", lg: "250px" }, display: "flex", justifyContent: "space-between", mb: 2 }}>
                         <Box sx={{ height: "100%", width: { xs: "49%", lg: "39%" }, objectFit: "cover" }}>
                             <img src={hotTopic[0]?.mainImage} alt='post image' style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </Box>
                         <Box sx={{ height: "100%", width: { xs: "49%", lg: "59%" } }}>
                             <Typography variant='h5' sx={{ display: "flex", alignItems: "center", fontSize: { xs: "1rem", lg: "1.7rem" }, mb: { xs: 1, lg: 3 } }}><Box component="span" sx={{ height: { xs: "10px", lg: "15px" }, width: { xs: "10px", lg: "15px" }, backgroundColor: "black", borderRadius: "50%", marginRight: "6px" }}></Box> Hot Topic</Typography>
-                            <Typography variant="h4" sx={{ fontSize: { xs: "1rem", lg: "2.5rem" }, fontWeight: "bold", mb: { xs: 2, lg: 2 } }}>{hotTopic[0]?.mainHeading}</Typography>
+                            <Typography variant="h4" sx={{ fontSize: { xs: "0.9rem", lg: "2.5rem" }, fontWeight: "bold", mb: { xs: 2, lg: 2 } }}>{hotTopic[0]?.mainHeading}</Typography>
                             <Typography variant="h6" sx={{ fontSize: { xs: "0.8rem", lg: "2rem" }, textTransform: "capitalize", mb: { lg: 2 } }}>{hotTopic[0]?.user?.location}, {hotTopic[0]?.createdAt}</Typography>
                             <Button sx={{ textTransform: "capitalize", color: "black", fontSize: { xs: "0.7rem", lg: "1rem" } }}><Link href={`/post/${hotTopic[0]?._id}/${hotTopic[0]?.slug}`}>Read more</Link> <EastIcon sx={{ ml: 1, width: { xs: "15px", lg: "25px" }, height: { xs: "15px", lg: "25px" } }} /></Button>
                         </Box>
@@ -54,7 +54,7 @@ function HomeSection1({ post, noPost, error }) {
                     <Box sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", mt: { xs: 1, lg: 3 } }}>
                         {others?.map((data, index) => {
                             return (
-                                <Box key={index} sx={{ width: { xs: "100%", lg: "33%" }, height: { xs: "70px", lg: "100px" }, mb: 1, display: "flex" }}>
+                                <Box key={index} sx={{ width: { xs: "100%", lg: "33%" }, height: { xs: "100px", lg: "100px" }, mb: 1, display: "flex" }}>
                                     <Link  href={`/post/${data?._id}/${data?.slug}`}>
                                         <IconButton sx={{textAlign:"start",color:"inherit",p:0,borderRadius:0,height:"100%",width:"100%"}}>
                                             <Box sx={{ width: "30%", height: "100%", objectFit: "cover" }}>

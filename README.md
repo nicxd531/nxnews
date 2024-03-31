@@ -51,21 +51,33 @@ List any software or tools that need to be installed before running the project.
 LIST
 Node.js (v14 or later)
 npm (v6 or later)
-@emotion/react": "^11.11.3",
-@emotion/styled": "^11.11.0",
-@mui/icons-material": "^5.15.7",
-@mui/material": "^5.15.7",
-aos": "^2.3.4",
-bootstrap": "^5.3.2",
-framer-motion": "^7.6.5",
-hamburger-react": "^2.5.0",
-react": "^18.2.0",
-react-bootstrap": "^2.10.0",
-react-dom": "^18.2.0",
-react-icons": "^4.6.0",
-react-tiny-link": "^3.6.1",
-react-typing-effect": "^2.0.5",
-swiper": "^11.0.5"
+"@emotion/cache": "^11.11.0",
+"@emotion/react": "^11.11.3",
+"@emotion/styled": "^11.11.0",
+"@fontsource/roboto": "^5.0.8",
+"@mui/icons-material": "^5.15.10",
+"@mui/lab": "^5.0.0-alpha.165",
+"@mui/material": "^5.15.10",
+"@mui/material-nextjs": "^5.15.11",
+"@reduxjs/toolkit": "^2.2.1",
+"@uploadthing/react": "^6.3.4",
+"aos": "^2.3.4",
+"axios": "^1.6.7",
+"bcryptjs": "^2.4.3",
+"bootstrap": "^5.3.3",
+"framer-motion": "^11.0.17",
+"mongoose": "^8.2.0",
+"multer": "^1.4.5-lts.1",
+"next": "14.1.0",
+"next-auth": "^4.24.6",
+"next-connect": "^1.0.0-next.4",
+"react": "^18",
+"react-bootstrap": "^2.10.1",
+"react-dom": "^18",
+"react-redux": "^9.1.0",
+"slugify": "^1.6.6",
+"swiper": "^11.0.7",
+"uploadthing": "^6.5.2"
 
 
 ### Installation
@@ -76,7 +88,7 @@ Step-by-step guide on how to install project dependencies and run the project lo
 git clone https://github.com/nicxd531/main-portfolio.git
 
 # Change directory
-cd MAIN-PORTFOLIO (change directory in to the location of the folder in your pc )
+cd nxnews (change directory in to the location of the folder in your pc )
 
 # Install dependencies
 npm install (installs all dependencies used in the project)
@@ -86,25 +98,74 @@ the project and application is mainly for job application purpose and also an op
 
 # Folder Structure
 this contains an explainantion of the main folder structure in the project
+.next/               # Public assets
+client/               # client side component folder
+|-- context/           # use context folder
+data/               # json data folder
+lib/               # libries folder
+models/               # mongoose models folder
+node modules/               # node modules folder
 public/               # Public assets
-|-- files/           # pdf file folder
 |-- image/           # image folder
-|-- video/           # video folder
 src/                  # Source code
-|-- about/           # the about section component folder
-|-- contact/       #  the contacts section component folder
-|-- home/            # the home section component folder
-|-- project/          # the project section component folder
-|-- services/           # the services section component folder
-|-- skills/           # the skills section component folder 
-|-- styles/           # styles (scss and css) folders
+|-- app/           # main app folder
+|--- (auth)/            # auth route folder
+|---- login/            # login folder
+|---- register/            # register folder
+|--- api/            # api route root folder
+|---- auth/            # auth api folder
+|----- [...nextauth]/            # next auth api folder
+|---- post/            # post api folder
+|----- create/            # create api folder
+|----- like/            # like api folder
+|----- search/            # search api folder
+|----- singlepost/            # singlepost api folder
+|----- user/            # user api folder
+|---- signup/            # signup api folder
+|---- uploadthing/            # uploadthing api folder
+|---- user/            # user api folder
+|----- follow/            # follow api folder
+|--- business/            # business page route folder
+|--- entertainment/            # entertainment page route folder
+|--- finance/            # finance page route folder
+|--- health/            # health page route folder
+|--- life/            # life page route folder
+|--- political/            # political page route folder
+|--- post/            # post page route folder
+|---- [id]/            # id route folder
+|---- [slug]/            # slug route folder
+|--- profile/            # profile page route folder
+|---- createNews/            # createNews page route folder
+|---- EditProfile/            # EditProfile page route folder
+|--- redux/            # redux folder
+|--- sport/            # sport page route folder
+|--- subscribe/            # sport page route folder
+|-- components/       #  components folder
+|--- app/       #  app components folder
+|--- business/       #  business components folder
+|--- entertainment/       #  entertainment components folder
+|--- finance/       #  finance components folder
+|--- health/       #  health components folder
+|--- home/       #  home components folder
+|--- Hooks/       #  Hooks components folder
+|--- life/       #  life components folder
+|--- political/       #  political components folder
+|--- post/       #  post components folder
+|--- profile/       #  profile components folder
+|--- reuseable/       #  reuseable components folder
+|--- skelentons/       #  skelentons components folder
+|--- sports/       #  sports components folder
+|--- subscribe/       #  subscribe components folder
+|-- utils/       #  utils functions folder
+
 App.jsx             # components for routing  
 Index.css             # main css file 
 main.jsx            # main component
 index.html            # main index file
 package-lock.json     # manifest for Node.js projects
 package.json          # lock file that keeps track of the exact versions of dependencies that were installed 
-vite.config.js        # Vite configuration file
+next.config.mjs        # Vite configuration file
+tailwind.config.js       # Vite configuration file
 
 ### Features
 List key features of the application.

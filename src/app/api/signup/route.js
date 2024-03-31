@@ -24,7 +24,6 @@ export async function POST(req) {
       const saveUser = await user.save();
       // if save user is true ,get data ,delete password ,create response and send response
       if (saveUser) {
-        console.log("success");
         const userDoc = saveUser._doc;
         delete userDoc.password;
         const main = responsehandler(userDoc);
