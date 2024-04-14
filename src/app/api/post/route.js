@@ -2,7 +2,7 @@ import { dbConnect } from "../../../../lib/db-connect";
 import Post from "../../../../models/Post";
 import { errorhandler, responsehandler } from "../../../../utils/common";
 
-export async function POST(req) {
+export async function GET(req) {
   // fuction for getting user post
   try {
     // connect database 

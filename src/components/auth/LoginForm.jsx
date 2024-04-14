@@ -3,7 +3,6 @@ import { Box, Button, Typography } from '@mui/material'
 import React from 'react'
 import Link from 'next/link';
 import LoginEmail from './LoginEmail';
-import Alert from '@mui/material/Alert';
 import { getSession, signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import { authConstant } from '../../../client/context/constant';

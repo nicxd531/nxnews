@@ -21,17 +21,16 @@ import { authConstant } from '../../../client/context/constant';
 import SearchAppBar from "./SearchAppBar"
 import { Divider } from '@mui/material';
 import { getUserData } from '../../../client/request';
-
+import sendTheme from '../../../zustand/sendTheme';
 
 function AsideBarM({
-    setThemeMode,
-    themeMode,
     handleOpenUserMenu,
     anchorElUser,
     handleCloseUserMenu,
     settings
 }) {
-    // store state,search state,user image state,get user value const,get authenticated state 
+    // store state,search state,user image state,get user value const,get authenticated state
+    const { selectedTheme, selectTheme } = sendTheme()
     const [state, dispatch] = useStore();
     const [search, setSearch] = React.useState(false);
     const [userImage, setUserImage] = React.useState(false);
@@ -39,9 +38,9 @@ function AsideBarM({
     const authenticated = getValue(state, ["user", "authenticated"], false);
     useEffect(() => {
         const get = async () => {
-            const session = await  getSession()
+            const session = await getSession()
             if (session?.user) {
-                const{id}=session?.user
+                const { id } = session?.user
                 const result = await getUserData(id)
                 if (!result?.hasError) {
                     setUserImage(result?.body.avatarImage)
@@ -54,12 +53,12 @@ function AsideBarM({
     }, [])
     return (
         <Box sx={{ flexGrow: 0 }}>
-            {search && <SearchAppBar  setSearch={setSearch} search={search}/>}
+            {search && <SearchAppBar setSearch={setSearch} search={search} />}
             <IconButton sx={{ mr: 1, color: 'white', }} onClick={() => setSearch(!search)}>
                 <SearchIcon sx={{ width: 20, height: 20 }} />
             </IconButton>
             {
-                themeMode == "dark" ? <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => setThemeMode("light")}> <LightModeIcon /> </IconButton> : <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => setThemeMode("dark")}><NightlightIcon /></IconButton>
+                selectedTheme == "dark" ? <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => selectTheme("light")}> <LightModeIcon /> </IconButton> : <IconButton sx={{ color: 'white', mr: 1 }} onClick={() => selectTheme("dark")}><NightlightIcon /></IconButton>
             }
 
             <Typography variant="h5" sx={{ display: "inline", color: 'white', }}>

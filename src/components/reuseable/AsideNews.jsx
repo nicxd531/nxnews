@@ -9,6 +9,7 @@ import AlertSuccess from "../reuseable/AlertSuccess";
 import AlertError from "../reuseable/AlertError";
 import AsideSkelenton from '../Skelentons/AsideSkelenton';
 import Link from 'next/link';
+import { DateTime } from 'luxon';
 
 function AsideNews() {
     // aside news component and states 
@@ -46,16 +47,21 @@ function AsideNews() {
             )}
             {!noPost ? (
                 post && data?.map((data, index) => {
+                    // Parse the MongoDB date string into a DateTime object
+                    const dateTime = DateTime.fromISO(data.createdAt);
+
+                    // Format the date as desired (e.g., 'May 1, 2022')
+                    const formattedDate = dateTime.toFormat('MMMM d, yyyy');
                     return (
                         <Box key={index} sx={{ height: "18%", width: "100%", display: "flex" }}>
-                            <Link href={`/post/${data?._id}/${data?.slug}`} style={{width:"100%"}}>
+                            <Link href={`/post/${data?._id}/${data?.slug}`} style={{ width: "100%" }}>
                                 <IconButton sx={{ textAlign: "start", color: "inherit", p: 0, borderRadius: 0, height: "100%", width: "100%" }}>
                                     <Box sx={{ width: "30%", objectFit: "cover", height: "100%" }}>
                                         <img src={data.mainImage} alt='post image' style={{ height: "100%", width: "100%", objectFit: "cover" }} />
                                     </Box>
                                     <Box sx={{ ml: 1, width: "69%" }}>
-                                        <Typography sx={{ fontSize: "0.8rem" ,fontWeight:"bold"}}>{data.mainHeading}</Typography>
-                                        <Typography sx={{ mt: 2, fontSize: "0.7rem" }}>{data.createdAt}</Typography>
+                                        <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }}>{data.mainHeading}</Typography>
+                                        <Typography sx={{ mt: 2, fontSize: "0.9rem" }}>{formattedDate}</Typography>
                                     </Box>
                                 </IconButton>
                             </Link>

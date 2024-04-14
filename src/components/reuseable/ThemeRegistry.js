@@ -1,15 +1,13 @@
-// app/ThemeRegistry.tsx
 "use client";
+import React from "react";
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider, ThemeProvider } from "@emotion/react";
-import React from "react";
-import { createTheme } from "@mui/material";
-
+import getTheme from "../../../utils/getTheme"
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
 export default function ThemeRegistry({ children }) {
-  const [themeMode, setThemeMode] = React.useState("light");
+  const {theme}=getTheme()
   const options = { key: "mui" };
   const [{ cache, flush }] = React.useState(() => {
     const cache = createCache(options);
@@ -50,16 +48,6 @@ export default function ThemeRegistry({ children }) {
       />
     );
   });
-  const theme = createTheme({
-    typography: {
-      fontFamily: "Roboto", // Change to your desired font family
-    },
-    palette: {
-      primary: { main: "#ff8b18b0" },
-      mode: themeMode,
-    },
-  });
-
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>

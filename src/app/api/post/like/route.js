@@ -14,7 +14,7 @@ export async function POST(req) {
     // check if user liked it already or not and check if post didnot come in
     const checkLikes = postLikes.includes(userId);
     if (!post) {
-      return Response.json(errorhandler("user Not Found"));
+      return Response.json(errorhandler("post Not Found"));
     }
     // like functions
     if (postLikes && !checkLikes && action == "like") {

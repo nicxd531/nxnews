@@ -15,33 +15,27 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import TemporaryDrawer from "./TemporaryDrawer"
-import { useDispatch, useSelector } from 'react-redux';
-import { ChangeThemeMode } from '../../app/redux/ThemeMode';
 import Link from 'next/link';
 import { useStore } from '../../../client/context';
 import { getValue } from '../../../utils/common';
 import { signOut } from 'next-auth/react';
 import { authConstant } from '../../../client/context/constant';
 import { getUserData } from '../../../client/request';
-
+import sendTheme from '../../../zustand/sendTheme';
 
 export default function MiniAppBar() {
+    const { selectedTheme, selectTheme } = sendTheme()
     // mini app bar component
     // context state ,themMode state,user value from context,auntenticated state,invoked dispatch states 
     const [state, dispatch] = useStore();
-    const themeMode = useSelector((state) => state.theme.value);
     const user = getValue(state, ["user"], null)
     const authenticated = getValue(state, ["user", "authenticated"], false);
-    const dispact = useDispatch()
     // auth state,user image state ,anchor state ,open state 
     const [auth, setAuth] = React.useState(false);
     const [userImage, setUserImage] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
-    // handle Theme change function ,toggleDrawer,handleMenu,handleClose,handleSignOut functions
-    const handeleThemeChange = (e) => {
-        dispact(ChangeThemeMode(e))
-    }
+    //toggleDrawer,handleMenu,handleClose,handleSignOut functions
     const toggleDrawer = (e) => {
         setOpen(e);
     };
@@ -62,19 +56,19 @@ export default function MiniAppBar() {
             })
         })
     }
-    useEffect(()=>{
-        const get =async ()=>{
-            if(user){
+    useEffect(() => {
+        const get = async () => {
+            if (user) {
                 const result = await getUserData(user?.id)
-               if(!result?.hasError){
-                setUserImage(result?.body.avatarImage)
-               }else if(result?.hasError){
-                setUserImage("")
-               }
+                if (!result?.hasError) {
+                    setUserImage(result?.body.avatarImage)
+                } else if (result?.hasError) {
+                    setUserImage("")
+                }
             }
         }
         get()
-    },[])
+    }, [user])
     return (
         <Box sx={{ flexGrow: 1, display: { lg: "none" } }}>
             <AppBar position="static" sx={{ backgroundColor: "snow" }}>
@@ -94,6 +88,9 @@ export default function MiniAppBar() {
                             Nxnews
                         </Link>
                     </Typography>
+                    {
+                        selectedTheme == "dark" ? <IconButton onClick={() => selectTheme("light")} > <LightModeIcon /></IconButton> : <IconButton onClick={() => selectTheme("dark")}><NightlightIcon /></IconButton>
+                    }
                     {authenticated ? (
                         <div>
                             <IconButton
@@ -105,7 +102,7 @@ export default function MiniAppBar() {
                                 color="inherit"
                             >
                                 <Typography sx={{ textTransform: "capitalize" }}>{user.name}</Typography>
-                                <Avatar alt={user.name} src={userImage==""?"":userImage} sx={{ width: 24, height: 24, ml: 1 }} />
+                                <Avatar alt={user.name} src={userImage == "" ? "" : userImage} sx={{ width: 24, height: 24, ml: 1 }} />
                             </IconButton>
                             <Menu
                                 id="menu-appbar"
@@ -130,17 +127,13 @@ export default function MiniAppBar() {
                         </div>
                     ) : <Box>
                         <Link href="/login">
-                            <Button color="inherit">Login </Button>
+                            <Button >Login </Button>
                         </Link>
                         <Link href="/register">
-                            <Button color="inherit">Register </Button>
+                            <Button >Register </Button>
                         </Link>
-
-                        {
-                            themeMode == "dark" ? <IconButton onClick={() => handeleThemeChange("light")} > <LightModeIcon /></IconButton> : <IconButton onClick={() => handeleThemeChange("dark")}><NightlightIcon /></IconButton>
-                        }
-
                     </Box>}
+
                 </Toolbar>
             </AppBar>
             <TemporaryDrawer toggleDrawer={toggleDrawer} open={open} />

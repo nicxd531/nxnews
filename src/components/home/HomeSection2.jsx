@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import AlertSuccess from '../reuseable/AlertSuccess'
 import AlertError from '../reuseable/AlertError'
 import Link from 'next/link';
-
+import { DateTime } from 'luxon';
+import { formatDistanceToNow } from 'date-fns';
 
 function HomeSection2({ post, noPost, error }) {
     // home section 2 component and const that make up home section 2
@@ -14,6 +15,10 @@ function HomeSection2({ post, noPost, error }) {
     const others = post?.slice(7, 9)
     const longText = hotTopic && hotTopic[0]?.cP
     const colour = hotTopic && hotTopic[0]?.categories
+    // Parse the MongoDB date string into a DateTime object
+    const dateTime = DateTime.fromISO(hotTopic[0]?.createdAt);
+    // Format the date as desired (e.g., 'May 1, 2022')
+    const formattedDate = dateTime.toFormat('MMMM d, yyyy');
     // paragraph reduction function
     function truncateText(text, maxLength) {
         return text && text?.length > maxLength ? text.slice(0, maxLength) + '...' : text;
@@ -61,7 +66,7 @@ function HomeSection2({ post, noPost, error }) {
                     )}
                 </AnimatePresence>
             )}
-            {( Array.isArray(others) && others?.length > 0) ? (
+            {(Array.isArray(others) && others?.length > 0) ? (
                 post &&
                 <>
                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 0, width: "100%" }}>
@@ -74,7 +79,7 @@ function HomeSection2({ post, noPost, error }) {
                             <Box sx={{ height: "60%", width: { xs: "100%", lg: "100%" }, objectFit: "cover", position: "relative", mb: 2 }}>
                                 <img src={hotTopic[0]?.mainImage} alt='post image' style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                 <Box sx={{ height: "25px", backgroundColor: bgColor, position: "absolute", top: 0, right: 0, mr: 1, mt: 1, p: 1, color: "whitesmoke", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", px: 2 }}><Typography sx={{ textTransform: "capitalize", fontSize: { xs: "1rem", lg: "1rem" } }}> {hotTopic[0].categories}</Typography></Box>
-                                <Typography variant="h6" sx={{ color: "whiteSmoke", fontSize: { xs: "0.5rem", lg: "1rem" }, textTransform: "capitalize", mb: { lg: 4 }, position: "absolute", bottom: 0, mb: 1, ml: 1, }}>{hotTopic[0]?.user?.location}, {hotTopic[0]?.createdAt}</Typography>
+                                <Typography variant="h6" sx={{ color: "whiteSmoke", fontSize: { xs: "0.5rem", lg: "1rem" }, textTransform: "capitalize", mb: { lg: 4 }, position: "absolute", bottom: 0, mb: 1, ml: 1, }}>{hotTopic[0]?.user?.location}, {formattedDate}</Typography>
                             </Box>
                             <Box sx={{ height: "100%", width: { xs: "100%", lg: "100%" } }}>
                                 <Typography variant="h4" sx={{ fontSize: { xs: "0.8rem", lg: "2rem" }, fontWeight: "bold", mb: { lg: 2 } }}>{hotTopic[0]?.mainHeading}</Typography>
@@ -84,6 +89,11 @@ function HomeSection2({ post, noPost, error }) {
                         </Box>
                         <Box sx={{ width: { xs: "100%", lg: "44%" }, display: "flex", justifyContent: "space-between", flexWrap: "wrap", mt: { xs: 2, lg: 0 } }}>
                             {others?.map((data, index) => {
+                                const dateTime = DateTime.fromISO(data?.createdAt);
+                                const formattedDate = dateTime.toFormat('MMMM d, yyyy');
+                                const createdAt = new Date(data?.createdAt);
+                                // Calculate the time since the post was created
+                                const timeSinceCreation = formatDistanceToNow(createdAt);
                                 function truncateText(text, maxLength) {
                                     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
                                 }
@@ -96,7 +106,7 @@ function HomeSection2({ post, noPost, error }) {
                                             <img src={data?.mainImage} alt='post image' style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                         </Box>
                                         <Box sx={{ ml: 2, width: { xs: "60%", } }}>
-                                            <Typography sx={{ fontWeight: "bold", fontSize: { xs: "0.7rem", lg: "1rem" } }}>{data?.createdAt}<span className='text-muted'>- 15 minutes ago</span></Typography>
+                                            <Typography sx={{ fontWeight: "bold", fontSize: { xs: "0.7rem", lg: "1rem" } }}>{formattedDate}<span className='text-muted'>- {timeSinceCreation}</span></Typography>
                                             <Typography variant="h5" sx={{ fontSize: { xs: "1rem", lg: "1.3rem" }, fontWeight: "bold", mb: { xs: 1, lg: 3 } }}>{data?.mainHeading}</Typography>
                                             <Typography className="text-muted" sx={{ fontSize: { xs: "0.6rem", lg: "1rem" }, mb: { lg: 2 } }}>{truncatedText}</Typography>
                                             <Button variant='contained' size={"small"} sx={{ mt: { xs: 2, lg: 0 }, textTransform: "capitalize", color: "white", fontSize: { xs: "0.6em", lg: "1rem" }, bgcolor: "black", px: 1 }}><Link href={`/post/${data?._id}/${data?.slug}`}>Read more <ArrowOutwardIcon sx={{ ml: 1 }} /></Link></Button>

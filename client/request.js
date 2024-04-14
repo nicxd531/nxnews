@@ -72,9 +72,8 @@ export const getUserData = async (userId) => {
 };
 // get user post function for handling post creation and sending request to the server
 export const getAllPost = async () => {
-  console.log("here")
   try {
-    const res = await axios.post(baseUrl + `/post`);
+    const res = await axios.get(baseUrl + `/post`);
     return res.data;
   } catch (error) {
     return errorhandler(error);
@@ -82,7 +81,6 @@ export const getAllPost = async () => {
 };
 // follow content creators function for handling following of content creator
 export const follow = async (payload) => {
-  console.log(payload,"from request")
   try {
     const res = await axios.post(baseUrl + `/user/follow`, payload);
     return res.data;

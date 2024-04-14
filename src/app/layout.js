@@ -6,7 +6,6 @@ import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Footer from "../components/appbar/Footer";
 import { StoreProvider } from "../../client/context";
 import "@uploadthing/react/styles.css";
-import { dbConnect } from "../../lib/db-connect";
 import { Box } from "@mui/material";
 
 export const metadata = {

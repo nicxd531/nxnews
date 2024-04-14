@@ -1,6 +1,5 @@
-import { Container, Paper, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import post from "../../data/post.json";
 import HomeMiddle from "../components/home/HomeMiddle";
 

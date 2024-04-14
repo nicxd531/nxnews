@@ -6,7 +6,7 @@ function HS1skelenton() {
     // home loading skelenton
     const arr = ["1", "2", "3"]
     return (
-        <Box sx={{ mt: { xs: 2, lg: 4 }, px: { xs: 2, lg: 4 },pt:6}}>
+        <Box sx={{ mt: { xs: 2, lg: 1 }, px: { xs: 2, lg: 4 },pt:2}}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Skeleton variant="rectangular" width={"48%"} sx={{ height: { xs: "150px", lg: "250px" } }} />
                 <Box sx={{ width: "48%" }}>

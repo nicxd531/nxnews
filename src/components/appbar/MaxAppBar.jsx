@@ -15,7 +15,6 @@ const settings = ['Dashboard', 'Logout'];
 
 function MaxAppBar() {
   // max app bar component and states to manage max app bar functions 
-  const [themeMode, setThemeMode] = React.useState(true);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 // mini menu functions 
@@ -73,8 +72,6 @@ function MaxAppBar() {
             ))}
           </Box>
           <AsideBarM
-            setThemeMode={setThemeMode}
-            themeMode={themeMode}
             handleOpenUserMenu={handleOpenUserMenu}
             anchorElUser={anchorElUser}
             handleCloseUserMenu={handleCloseUserMenu} 

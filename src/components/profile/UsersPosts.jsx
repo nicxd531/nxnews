@@ -5,6 +5,7 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import React from 'react'
 import { deletePost } from '../../../client/request';
 import Link from 'next/link';
+import { DateTime } from 'luxon';
 
 function UsersPosts({ data, revalidate, setRevalidate }) {
     // component for getting users specific post 
@@ -12,8 +13,11 @@ function UsersPosts({ data, revalidate, setRevalidate }) {
     function truncateText(text, maxLength) {
         return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
     }
+    // Parse the MongoDB date string into a DateTime object
+    const dateTime = DateTime.fromISO(data?.createdAt);
+    // Format the date as desired (e.g., 'May 1, 2022')
+    const formattedDate = dateTime.toFormat('MMMM d, yyyy');
     // constant for likes length, long text,truncated text
-    const likes = data?.likes == [] ? 0 : data?.likes
     const longText = data.cP
     const truncatedText = truncateText(longText, 100); // Truncate to 100 characters
     // conditional statement for picking categories diaplay colours 
@@ -50,7 +54,7 @@ function UsersPosts({ data, revalidate, setRevalidate }) {
                         <img src={data.mainImage ? data.mainImage : "/images/no image.avif"} alt="post image" style={{ objectFit: 'cover', width: "100%", height: "100%", overFlow: "hidden" }} />
                     </Box>
                     {data.categories && <Box sx={{ height: "25px", backgroundColor: bgColor, position: "absolute", top: 0, right: 0, mr: 1, mt: 1, p: 1, color: "whitesmoke", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", px: 2 }}><Typography sx={{ textTransform: "capitalize", fontSize: { xs: "1rem", lg: "1rem" } }}> {data.categories}</Typography></Box>}
-                    <Typography sx={{ position: "absolute", bottom: 0, mb: 1, ml: 1, fontSize: { xs: "0.9rem", lg: "1rem" }, color: "whitesmoke" }}>Ukraine, {new Date(data?.createdAt).toLocaleDateString()}</Typography>
+                    <Typography sx={{ position: "absolute", bottom: 0, mb: 1, ml: 1, fontSize: { xs: "0.9rem", lg: "1rem" }, color: "whitesmoke" }}>Ukraine, {formattedDate}</Typography>
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
                     {data.mainHeading && <Typography variant='h5' sx={{ fontWeight: "bold", width: "100%" }}> {data.mainHeading}</Typography>}
