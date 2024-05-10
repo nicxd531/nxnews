@@ -23,23 +23,23 @@ function SearchBar() {
     const [realData, setRealData] = React.useState(null)
     // function for searching 
     const search = async () => {
-        try{
+        try {
             setSearching(true)
-        setLoading(true)
-        const res = await axios.get(baseUrl + `/post/search?query=${data}`);
-        const dataMain = res.data
-        if (dataMain?.hasError) {
-            setLoading(false)
-            setError("error fetching ")
-        } else if (!dataMain?.hasError) {
-            setRealData(dataMain)
-            setLoading(false)
-        } else if (dataMain?.body?.length > 0) {
-            setLoading(false)
-            setError("not Found ")
-        }
+            setLoading(true)
+            const res = await axios.get(baseUrl + `/post/search?query=${data}`);
+            const dataMain = res.data
+            if (dataMain?.hasError) {
+                setLoading(false)
+                setError("error fetching ")
+            } else if (!dataMain?.hasError) {
+                setRealData(dataMain)
+                setLoading(false)
+            } else if (dataMain?.body?.length > 0) {
+                setLoading(false)
+                setError("not Found ")
+            }
 
-        }catch(err){
+        } catch (err) {
             setError("failed to load")
         }
     }
@@ -50,7 +50,7 @@ function SearchBar() {
     return (
         <Box sx={{ mt: { xs: 3, lg: 6 }, zIndex: "0", position: "relative", width: "100%", zIndex: 1200 }}>
             <Box sx={{ width: "100%", textAlign: "center" }}>
-                <Typography variant="h3" sx={{ textTransform: "capitalize", fontWeight: "bold", width: { xs: "100%", lg: "40%" }, mx: "auto", fontSize: { xs: "1.5rem", lg: "3rem" } ,mt:{xs:3,lg:0}}}>read the latest news from around the world</Typography>
+                <Typography variant="h3" sx={{ textTransform: "capitalize", fontWeight: "bold", width: { xs: "100%", lg: "40%" }, mx: "auto", fontSize: { xs: "1.5rem", lg: "3rem" }, mt: { xs: 3, lg: 0 } }}>read the latest news from around the world</Typography>
             </Box>
             <Box sx={{ width: "100%", mt: { xs: 3, lg: 6 } }}>
                 <Paper

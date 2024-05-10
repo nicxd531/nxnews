@@ -18,7 +18,7 @@ export const CreatePost = async (form) => {
   } catch (error) {
     return getValue(error, ["response", "data"]);
   }
-};
+}; 
 
 // get user post function for handling post creation and sending request to the server
 export const getUserPost = async (payload) => {
