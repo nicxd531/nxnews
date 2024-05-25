@@ -7,6 +7,7 @@ import Footer from "../components/appbar/Footer";
 import { StoreProvider } from "../../client/context";
 import "@uploadthing/react/styles.css";
 import { Box } from "@mui/material";
+import NextTopLoader from 'nextjs-toploader';
 
 export const metadata = {
   title: "Nxnews",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
           <ScopedCssBaseline>
             <StoreProvider>
               <AppBar />
+              <NextTopLoader color="#ff7b00"/>
               <Box sx={{pt:{xs:5,lg:5}}}>
                  {children}
               </Box>
