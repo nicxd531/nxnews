@@ -36,15 +36,15 @@ function FollowBtn({ user }) {
         const verify = async () => {
             const session = await getSession()
             setSession(session)
-            const userId = session?.user?.id
-            setUserId(userId)
-            const check = contentCreatorFollowers?.filter((follower) => follower == userId)
-            if (check && check.length > 0) {
-                setFollowing(true)
-            } else if (!check || check.length <= 0) {
-
-
-                setFollowing(false)
+            if(session){
+                const userId = session?.user?.id
+                setUserId(userId)
+                const check = contentCreatorFollowers?.filter((follower) => follower == userId)
+                if (check && check.length > 0) {
+                    setFollowing(true)
+                } else if (!check || check.length <= 0) {
+                    setFollowing(false)
+                }
             }
         }
         verify()

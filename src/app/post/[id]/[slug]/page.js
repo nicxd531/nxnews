@@ -11,7 +11,7 @@ import HotTopics from "../../../../components/reuseable/HotTopics";
 function SingleBlog({ params }) {
   // main single post component and state management for single post
   const [post, setPost] = React.useState(null);
-  const [session, setSession] = React.useState(false);
+  // const [session, setSession] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [userContent, setUserContent] = React.useState(true);
@@ -21,8 +21,8 @@ function SingleBlog({ params }) {
       try {
         setError(false);
         setLoading(true);
-        const session = await getSession();
-        const userId = await session.user.id;
+        // const session = await getSession();
+        // const userId = await session.user.id;
         const postM = await getSinglePost(params.id);
         if (postM == null) {
           setError("Failed to fetch, Check connection");
@@ -34,7 +34,7 @@ function SingleBlog({ params }) {
               setUserContent(UserC?.body);
             }
             setPost(postM?.body?.posts);
-            setSession(session);
+            // setSession(session);
           } else if (postM.hasError) {
             setError("failed to load, Check connection");
           }
